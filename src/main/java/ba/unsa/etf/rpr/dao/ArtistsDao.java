@@ -10,7 +10,7 @@ import java.util.List;
 public interface ArtistsDao extends Dao<Artists> {
     @Override  //da li je override potreban ?
      Artists getById(int id) ;
-
+//public is redundant
     @Override
      Artists add(Artists item);
 
