@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.dao;
 
-import ba.unsa.etf.rpr.domain.Customers;
+
 import ba.unsa.etf.rpr.domain.Exhibitions;
 
 import java.util.List;
