@@ -1,4 +1,4 @@
-package ba.unsa.etf.rpr;
+package ba.unsa.etf.rpr.domain;
 //import ba.unsa.etf.rpr.domain.Artists;
 //zasto import ovaj?
 
@@ -8,5 +8,7 @@ import java.util.List;
 
 public class Artists //implements ArtistsDao
 {
+
+
 
 }
