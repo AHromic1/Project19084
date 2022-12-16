@@ -74,9 +74,9 @@ public class ArtistsSQLImplementation  implements Dao<Artists>{
 
             stmt.setString(1, item.getFirst_name());
             stmt.setString(2, item.getLast_name());
-            stmt.setString(1, item.getBirthplace());
-            stmt.setDate(1, item.getDate_of_birth());
-            stmt.setInt(1, item.getArt_FK());
+            stmt.setString(3, item.getBirthplace());
+            stmt.setDate(4, item.getDate_of_birth());
+            stmt.setInt(5, item.getArt_FK());
 
             stmt.executeUpdate();
 
@@ -119,7 +119,7 @@ public class ArtistsSQLImplementation  implements Dao<Artists>{
     }
     @Override
     public void delete(int id) {
-        String delete = "DELETE FROM Artists WHERE id = ?";
+        String delete = "DELETE FROM Artists WHERE Artist_id = ?";
         try{
             PreparedStatement stmt = this.connection.prepareStatement(delete, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, id);
@@ -148,6 +148,7 @@ public class ArtistsSQLImplementation  implements Dao<Artists>{
                 A.setBirthplace(rs.getString(4));
                 A.setDate_of_birth(rs.getDate(5));
                 A.setArt_FK(rs.getInt(6));
+                artists.add(A);
             }
             rs.close();
         }
