@@ -97,7 +97,7 @@ public class ArtistsSQLImplementation  implements Dao<Artists>{
 
     @Override
     public Artists update(Artists item) {
-        String update = "UPDATE Artists SET First_name = ?, Last_name = ?, Birthplace = ?, Date_of_birth = ?, Art_FK = ?   WHERE id = ?";
+        String update = "UPDATE Artists SET First_name = ?, Last_name = ?, Birthplace = ?, Date_of_birth = ?, Art_FK = ?   WHERE Artist_id = ?";
         try{
             PreparedStatement stmt = this.connection.prepareStatement(update, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, item.getFirst_name());
@@ -105,6 +105,8 @@ public class ArtistsSQLImplementation  implements Dao<Artists>{
             stmt.setObject(3, item.getBirthplace());
             stmt.setObject(4, item.getDate_of_birth());
             stmt.setObject(5, item.getArt_FK());
+
+            //ZASTO NE SETAMO I ID U PREPARE STATEMENT??
 
             stmt.executeUpdate();
 
