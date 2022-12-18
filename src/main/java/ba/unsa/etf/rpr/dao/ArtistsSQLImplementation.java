@@ -16,7 +16,7 @@ public class ArtistsSQLImplementation  implements Dao<Artists>{
      */
     public ArtistsSQLImplementation(){
         try{
-            this.connection = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net", "sql7582777", "RUnD8aSmIE");
+            this.connection = DriverManager.getConnection("jdbc:mysql://sql.freedb.tech/freedb_Art gallery RPR", "freedb_ahromic1", "nH2!uWJ@uMP&9k6");
             //connects to a database
             //url: jdbc:mysql:// + my link
         }
