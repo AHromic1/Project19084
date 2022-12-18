@@ -11,7 +11,7 @@ public class Artists //implements ArtistsDao
 {
 
     //java beans? sta da radim s imenima, da li da mijenjam i ovdje i u bazi podataka ?
-    private static int Artist_id;
+    private static int Artist_id = 0;
     private static String First_name;
     private static String Last_name;
     private static String Birthplace;
