@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import java.sql.Date;
 
 import static javafx.application.Application.launch;
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 /**
  * Hello world!
@@ -43,8 +44,8 @@ public class App extends Application
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/sample.fxml"));  //u sample su labele, buttons i sl
        ///fxml - usli u fxml , a getResource dobavlja file iz resources
 
-        primaryStage.setTitle("Hello, World!");
-        primaryStage.setScene(new Scene(root, 300, 275));  //pravimo scenu i ucitavamo root - tu je sample
+        primaryStage.setTitle("Registration");
+        primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));  //pravimo scenu i ucitavamo root - tu je sample
        //i ovdje dodati use computed size
         primaryStage.show();  //prikazemo stage
     }
