@@ -4,8 +4,7 @@ import ba.unsa.etf.rpr.domain.Artists;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-
+import java.util.Properties;
 
 
 public class ArtistsSQLImplementation  implements Dao<Artists>{
@@ -16,7 +15,12 @@ public class ArtistsSQLImplementation  implements Dao<Artists>{
      */
     public ArtistsSQLImplementation(){
         try{
-            this.connection = DriverManager.getConnection("jdbc:mysql://sql.freedb.tech/freedb_Art gallery RPR", "freedb_ahromic1", "nH2!uWJ@uMP&9k6");
+            Properties p = new Properties();
+            p.load(ClassLoader.getSystemResource("database.properties").openStream());
+            String url = p.getProperty("url");
+            String username = p.getProperty("username");
+            String password = p.getProperty("password");
+            this.connection = DriverManager.getConnection(url, username, password);
             //connects to a database
             //url: jdbc:mysql:// + my link
         }
@@ -59,7 +63,7 @@ public class ArtistsSQLImplementation  implements Dao<Artists>{
             e.printStackTrace(); // poor error handling
         }
         return null;
-        //ZBOG ECXEPTION, on ce ispisati tekst stack trace, ali treba da nesto vrati
+        //ZBOG ECXEPTION, on ce ispisati tekst stack trace, ali treba da se nesto vrati
     }
 
     @Override
