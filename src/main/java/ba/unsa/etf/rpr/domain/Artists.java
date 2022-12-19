@@ -6,25 +6,17 @@ package ba.unsa.etf.rpr.domain;
 import java.util.Date;
 import java.util.Objects;
 
-public class Artists //implements ArtistsDao
+public class Artists implements Idable
 {
 
     //java beans? sta da radim s imenima, da li da mijenjam i ovdje i u bazi podataka ?
-    private static int Artist_id = 0;
+    private static int Id ;
     private static String First_name;
     private static String Last_name;
     private static String Birthplace;
     private static Date Date_of_birth;
     private static int Art_FK;  //da li je i ovo potrebno ?
 
-
-    public int getArtist_id() {
-        return Artist_id;
-    }
-
-    public static void setArtist_id(int artist_id) {
-        Artist_id = artist_id;
-    }
 
     public String getFirst_name() {
         return First_name;
@@ -71,24 +63,35 @@ public class Artists //implements ArtistsDao
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Artists artists = (Artists) o;  //objest turned into Artists
-        return Artist_id == artists.Artist_id && Art_FK == artists.Art_FK && First_name.equals(artists.First_name) &&
+        return Id == artists.Id && Art_FK == artists.Art_FK && First_name.equals(artists.First_name) &&
                 Last_name.equals(artists.Last_name) && Birthplace.equals(artists.Birthplace) && Date_of_birth.equals(artists.Date_of_birth);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Artist_id, First_name, Last_name, Birthplace, Date_of_birth, Art_FK);
+        return Objects.hash(Id, First_name, Last_name, Birthplace, Date_of_birth, Art_FK);
     }
 
     @Override
     public String toString() {
         return "Artists{" +
-                "Artist_id=" + Artist_id +
+                "Artist_id=" + Id +
                 ", First_name='" + First_name + '\'' +
                 ", Last_name='" + Last_name + '\'' +
                 ", Birthplace='" + Birthplace + '\'' +
                 ", Date_of_birth=" + Date_of_birth +
                 ", Art_FK=" + Art_FK +
                 '}';
+    }
+
+    @Override
+    public void setId(int id) {
+        Id = id;
+
+    }
+
+    @Override
+    public int getId() {
+        return Id;
     }
 }
