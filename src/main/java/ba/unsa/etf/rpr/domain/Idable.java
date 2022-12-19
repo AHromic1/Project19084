@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.domain;
 
-public interface idable {
+public interface Idable {
      void setId(int id);
         int getId();
 }
