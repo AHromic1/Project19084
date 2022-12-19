@@ -39,7 +39,7 @@ public class ArtistsSQLImplementation  implements Dao<Artists>{
             ResultSet rs = stmt.executeQuery();
 
             //ZASTO RADIMO OVO? - prelazimo u iduci red (iz kojeg citamo, tj ako postoji red, onda...)
-            //pravimo novi ibjekar artists, u koji upisujemo redom ćelije iz reda, koji ćemo ONDA proslijediti presentation layer i u interface
+            //pravimo novi objekat artists, u koji upisujemo redom ćelije iz reda, koji ćemo ONDA proslijediti presentation layer i u interface
 
             //DA LI JE POTREBNA METODA ZA SVAKU KOLONU - setfirstname, last name, itd DA
 
@@ -68,19 +68,17 @@ public class ArtistsSQLImplementation  implements Dao<Artists>{
 
     @Override
     public Artists add(Artists item) {
-        String insert = "INSERT INTO Artists(First_name, Last_name, Birthplace, Date_of_birth, Art_FK) VALUES(?,?,?,?, ?)";
+        String insert = "INSERT INTO Artists(First_name, Last_name, Birthplace, Date_of_birth) VALUES(?,?,?,?)";
         //da li se art fk uopce uzima u obzir?
         try{
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             //generated keys slicno kao auto increment??? - da, to je id
 
-
-
             stmt.setString(1, item.getFirst_name());
             stmt.setString(2, item.getLast_name());
             stmt.setString(3, item.getBirthplace());
-            stmt.setDate(4, item.getDate_of_birth());
-            stmt.setInt(5, item.getArt_FK());
+            stmt.setObject(4, item.getDate_of_birth());
+           // stmt.setInt(5, item.getArt_FK());
 
             stmt.executeUpdate();
 
