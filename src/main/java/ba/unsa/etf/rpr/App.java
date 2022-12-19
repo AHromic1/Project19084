@@ -8,7 +8,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import static javafx.application.Application.launch;
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
@@ -27,7 +29,11 @@ public class App
         artist.setFirst_name("Frida");
         artist.setLast_name("Kahlo");
         artist.setBirthplace("Spain");
-        Date firstDate1 = new Date(2001, 11, 1);
+       // Date firstDate1 = new Date(2001, 11, 1);  //koristiti calendar
+
+       Calendar c = new GregorianCalendar();
+       c.set(1812, 12, 12);
+       Date firstDate1 =  c.getTime();
         artist.setDate_of_birth(firstDate1);
         artist.setArt_FK(20);
 
