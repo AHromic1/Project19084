@@ -7,10 +7,10 @@ public class Artwork implements Idable{
     private String Name;
     private String Type;
     private String Era;
-    private String Style;
     private double Price;
-    private int Customer_FK;
     private int Exhibition_FK;
+
+    private int Art_FK;
 
 
     public void setName(String name) {
@@ -25,16 +25,16 @@ public class Artwork implements Idable{
         Era = era;
     }
 
-    public void setStyle(String style) {
-        Style = style;
+    public int getArt_FK() {
+        return Art_FK;
+    }
+
+    public void setArt_FK(int art_FK) {
+        Art_FK = art_FK;
     }
 
     public void setPrice(double price) {
         Price = price;
-    }
-
-    public void setCustomer_FK(int customer_FK) {
-        Customer_FK = customer_FK;
     }
 
     public void setExhibition_FK(int exhibition_FK) {
@@ -53,16 +53,9 @@ public class Artwork implements Idable{
         return Era;
     }
 
-    public String getStyle() {
-        return Style;
-    }
 
     public double getPrice() {
         return Price;
-    }
-
-    public int getCustomer_FK() {
-        return Customer_FK;
     }
 
     public int getExhibition_FK() {
@@ -75,11 +68,10 @@ public class Artwork implements Idable{
                 ", Name='" + Name + '\'' +
                 ", Type='" + Type + '\'' +
                 ", Era='" + Era + '\'' +
-                ", Style='" + Style + '\'' +
                 ", Price=" + Price +
-                ", Customer_FK=" + Customer_FK +
                 ", Exhibition_FK=" + Exhibition_FK +
-                '}';
+                ", Art_FK=" + Art_FK +
+                "}";
     }
 
     @Override
@@ -87,12 +79,12 @@ public class Artwork implements Idable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Artwork artwork = (Artwork) o;
-        return Id == artwork.Id && Double.compare(artwork.Price, Price) == 0 && Customer_FK == artwork.Customer_FK && Exhibition_FK == artwork.Exhibition_FK && Name.equals(artwork.Name) && Type.equals(artwork.Type) && Era.equals(artwork.Era) && Style.equals(artwork.Style);
+        return Id == artwork.Id && Double.compare(artwork.Price, Price) == 0 && Exhibition_FK == artwork.Exhibition_FK && Art_FK == artwork.Art_FK && Name.equals(artwork.Name) && Type.equals(artwork.Type) && Era.equals(artwork.Era);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, Name, Type, Era, Style, Price, Customer_FK, Exhibition_FK);
+        return Objects.hash(Id, Name, Type, Era, Price, Exhibition_FK, Art_FK);
     }
 
     @Override
