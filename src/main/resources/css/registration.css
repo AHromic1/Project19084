@@ -1,0 +1,11 @@
+#OKId{
+-fx-background-color: lightskyblue;
+}
+
+.incorrect{
+-fx-background-color: lightpink;
+}
+
+.correct{
+-fx-background-color: yellowgreen;
+}
