@@ -15,7 +15,7 @@ public class Artists implements Idable
     private static String Last_name;
     private static String Birthplace;
     private static Date Date_of_birth;
-    private static int Art_FK;  //da li je i ovo potrebno ?
+
 
 
     public String getFirst_name() {
@@ -50,26 +50,20 @@ public class Artists implements Idable
         Date_of_birth = date_of_birth;
     }
 
-    public int getArt_FK() {
-        return Art_FK;
-    }
 
-    public static void setArt_FK(int art_FK) {
-        Art_FK = art_FK;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Artists artists = (Artists) o;  //objest turned into Artists
-        return Id == artists.Id && Art_FK == artists.Art_FK && First_name.equals(artists.First_name) &&
+        return Id == artists.Id &&  First_name.equals(artists.First_name) &&
                 Last_name.equals(artists.Last_name) && Birthplace.equals(artists.Birthplace) && Date_of_birth.equals(artists.Date_of_birth);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, First_name, Last_name, Birthplace, Date_of_birth, Art_FK);
+        return Objects.hash(Id, First_name, Last_name, Birthplace, Date_of_birth);
     }
 
     @Override
@@ -80,8 +74,7 @@ public class Artists implements Idable
                 ", Last_name='" + Last_name + '\'' +
                 ", Birthplace='" + Birthplace + '\'' +
                 ", Date_of_birth=" + Date_of_birth +
-                ", Art_FK=" + Art_FK +
-                '}';
+                "}";
     }
 
     @Override
