@@ -4,7 +4,7 @@ package ba.unsa.etf.rpr.domain;
 import java.sql.Date;
 import java.util.Objects;
 
-//generalno, kako radi?
+
 public class Exhibitions implements Idable{
     private int Id;
     private String Exhibition_name;
