@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class ArtworkSQLImplementation extends AbstractDao<Artwork> implements Dao<Artwork> {
+public class ArtworkSQLImplementation extends AbstractDao<Artwork> implements ArtworkDao {
 
     public ArtworkSQLImplementation() {
         super("Artwork");

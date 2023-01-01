@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 
-public class ArtistsSQLImplementation extends AbstractDao<Artists> implements Dao<Artists>{
+public class ArtistsSQLImplementation extends AbstractDao<Artists> implements ArtistsDao{
 
     /**
      * constructor for Artists
