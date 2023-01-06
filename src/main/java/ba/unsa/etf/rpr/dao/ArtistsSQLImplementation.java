@@ -11,13 +11,27 @@ import java.util.TreeMap;
 
 
 public class ArtistsSQLImplementation extends AbstractDao<Artists> implements ArtistsDao{
+    private static  ArtistsSQLImplementation instance = null;
 
     /**
      * constructor for Artists
      */
     public ArtistsSQLImplementation() {
+
         super("Artists");
     }
+
+    public static ArtistsSQLImplementation getInstance(){
+        if(instance==null)
+            instance = new ArtistsSQLImplementation();
+        return instance;
+    }
+
+    public static void removeInstance(){
+        if(instance!=null)
+            instance=null;
+    }
+
     @Override
     public Artists row2object(ResultSet rs) throws DBException {
         try {
