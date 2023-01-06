@@ -2,21 +2,14 @@ package ba.unsa.etf.rpr.dao;
 
 
 import ba.unsa.etf.rpr.domain.Exhibitions;
+import ba.unsa.etf.rpr.exceptions.DBException;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface ExhibitionsDao extends Dao<Exhibitions>  {
 
-    Exhibitions getById(int id) ;
-    //public is redundant
-
-    Exhibitions add(Exhibitions item);
-
-
-    Exhibitions update(Exhibitions item);
-    void delete(int id);
-
-    List<Exhibitions> getAll() ;
+    List<Exhibitions> SearchByDate(Date start, Date end) throws DBException;
 
 
 }
