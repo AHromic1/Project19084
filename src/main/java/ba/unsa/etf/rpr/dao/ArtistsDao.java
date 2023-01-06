@@ -8,19 +8,5 @@ import java.util.List;
  * an interface for artists which extends Dao with methods specific for artists table
  */
 public interface ArtistsDao extends Dao<Artists> {
-//    @Override  //da li je override potreban ?
-//     Artists getById(int id) ;
-////public is redundant
-//    @Override
-//     Artists add(Artists item);
-//
-//    @Override
-//     Artists update(Artists item);
-//
-//    @Override
-//     void delete(int id);
-//    @Override
-//     List<Artists> getAll() ;
-
 
 }
