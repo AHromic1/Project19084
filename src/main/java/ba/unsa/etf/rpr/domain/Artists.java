@@ -3,7 +3,7 @@ package ba.unsa.etf.rpr.domain;
 //zasto import ovaj?
 
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 public class Artists implements Idable
