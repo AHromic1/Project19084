@@ -9,11 +9,23 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class ArtworkSQLImplementation extends AbstractDao<Artwork> implements ArtworkDao {
+    private static ArtworkSQLImplementation instance = null;
 
     public ArtworkSQLImplementation() {
+
         super("Artwork");
     }
 
+    public static ArtworkSQLImplementation getInstance(){
+        if(instance==null)
+            instance = new ArtworkSQLImplementation();
+        return instance;
+    }
+
+    public static void removeInstance(){
+        if(instance!=null)
+            instance=null;
+    }
     @Override
     public Artwork row2object(ResultSet rs) throws DBException {
         try {
