@@ -9,37 +9,57 @@ import java.util.*;
 
 /**
  * Abstract class that implements core DAO CRUD methods for every entity
+ * @author Amina Hromic 19084
  */
 
 public abstract class AbstractDao <T extends Idable> implements Dao<T>{
-    private Connection connection;
+    private static Connection connection;
     private String tableName;
 
     public AbstractDao(String tableName) {
-    try{
         this.tableName = tableName;
-        Properties p = new Properties();
-        p.load(ClassLoader.getSystemResource("database.properties").openStream());
-        String url = p.getProperty("db.connection_string");
-        String username = p.getProperty("db.username");
-        String password = p.getProperty("db.password");
-        this.connection = DriverManager.getConnection(url, username, password);
-    }
-    catch (Exception e){
-        System.out.println("Faulty connection");
-        e.printStackTrace();
-        System.exit(0);  //exits with 0
-
-    }
+        if(connection==null) createConnection();
 }
 
-    /**
-     * setters and getters for a Connection attribute
-     */
+    private static void createConnection(){
+        if(AbstractDao.connection==null) {
+            try {
+                Properties p = new Properties();
+                p.load(ClassLoader.getSystemResource("application.properties").openStream());
+                String url = p.getProperty("connection_string");
+                String username = p.getProperty("username");
+                String password = p.getProperty("password");
+                AbstractDao.connection = DriverManager.getConnection(url, username, password);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.exit(0);
+            }
+        }
+    }
 
     public Connection getConnection(){
-        return this.connection;
+
+        return AbstractDao.connection;
     }
+
+    /**
+     * For singleton pattern, we have only one connection on the database which will be closed automatically when our program ends
+     * But if we want to close connection manually, then we will call this method which should be called from finally block
+     */
+
+    public static void closeConnection() {
+        System.out.println("Closing connection");
+        if(connection!=null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                //throw new RuntimeException(e);
+                e.printStackTrace();
+                System.out.println("REMOVE CONNECTION METHOD ERROR: Unable to close connection on a database");
+            }
+        }
+    }
+
     public void setConnection(Connection connection){
         this.connection = connection;
     }
@@ -78,13 +98,13 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T>{
             PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, id);
             stmt.executeUpdate();
-        }catch (SQLException e){
+        }
+        catch (SQLException e){
             throw new DBException(e.getMessage(), e);
         }
     }
 
     public T add(T item) throws DBException {
-        ////zasto mapiranje?
         Map<String, Object> row = object2row(item);
         Map.Entry<String, String> columns = prepareInsertParts(row);
 
@@ -109,7 +129,8 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T>{
             item.setId(rs.getInt(1)); //set id to return it back */
 
             return item;
-        }catch (SQLException e){
+        }
+        catch (SQLException e){
             throw new DBException(e.getMessage(), e);
         }
     }
@@ -164,7 +185,8 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T>{
                 result.add(row2object(rs));
             }
             return result;
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new DBException(e.getMessage(), e);
         }
     }
