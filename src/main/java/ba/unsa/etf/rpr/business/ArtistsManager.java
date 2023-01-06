@@ -1,34 +1,67 @@
 package ba.unsa.etf.rpr.business;
 
+import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Artists;
 import ba.unsa.etf.rpr.domain.Exhibitions;
 import ba.unsa.etf.rpr.exceptions.DBException;
 
+import java.sql.Date;
 import java.time.LocalDate;
+import java.time.Year;
 import java.util.List;
 
 public class ArtistsManager {
 
 
         public void validateFirst_name(String FName) throws DBException {
-            if (FName == null || FName.length() > 50 || FName.length() < 0){
-                throw new DBException("Artist's first name cannot be longer than 50 or shorter than 0 characters!");
+            if (FName == null || FName.length() > 50 || FName.length() < 1){
+                throw new DBException("Artist's first name cannot be longer than 50 or shorter than 1 character1!");
             }
         }
         public void validateLast_name(String LName) throws DBException {
-            if (LName == null || LName.length() > 50 || LName.length() < 0){
-                throw new DBException("Artist's last name cannot be longer than 50 or shorter than 0 characters!");
+            if (LName == null || LName.length() > 50 || LName.length() < 1){
+                throw new DBException("Artist's last name cannot be longer than 50 or shorter than 1 character1!");
             }
         }
 
-        public void validateBirth_date(LocalDate d) throws DBException {
-            //moze?
-            LocalDate s =  d;
+    public void validateBirthplace(String place) throws DBException {
+        if (place == null || place.length() > 50 || place.length() < 1){
+            throw new DBException("Birthplace cannot be longer than 50 or shorter than 1 character!");
+        }
+    }
 
-            //timezone?
+    private boolean validateDate(LocalDate d){
+        int y = d.getYear();
+        int m = d.getMonthValue();
+        int dd = d.getDayOfMonth();
+        if(m < 0 || dd < 0 || y < 0 || y > Year.now().getValue()) return false;  //basic conditions
 
-            //   if (start == null || s.getYear() >   || start.length() < 0){
+        if(y % 4 == 0 && y % 100 != 0 || y % 400 == 0){//leap year
+            if(m == 2 &&  dd > 29) return false;
+        }
+        else{  //not a leap year
+            if(m == 2 &&  dd > 28) return false;
+        }
+
+        if((m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12) && dd > 31) return false;  //a month has 31 days
+        else if(dd > 30) return false;  //a month has 30 days
+
+        return true;
+    }
+
+
+
+    public void validateBirth_date(LocalDate d) throws DBException {
+
+        //Date d = Date.valueOf(start.getYear() + "-" + start.getMonth() + "-" + start.getDayOfMonth());
+        //moze?
+        // LocalDate s = start;
+
+        //timezone?
+
+        if (d == null || !validateDate(d)) {
             throw new DBException("Invalid date!");
+        }
         }
 
 
@@ -39,39 +72,44 @@ public class ArtistsManager {
         }
         validateFirst_name(a.getFirst_name());
         validateLast_name(a.getLast_name());
+        validateBirthplace(a.getBirthplace());
+        validateBirth_date(a.getDate_of_birth().toLocalDate());  //moze samo na sql date
 
         try{
-              return DaoFactory.ExhibitionsDao().add(e);  PRVO POPRAVITI DAOFACTORY
+              return DaoFactory.artistsDao().add(a);
         }
         catch (DBException exc){
             //ovo???
             if (exc.getMessage().contains("UQ_NAME")){
-                throw new DBException("Category with same name exists");
+                throw new DBException("Artist with same name exists");
             }
             throw exc;
         }
     }
 
-    public void delete(int categoryId) throws DBException{
+    public void delete(int artistId) throws DBException{
         try{
-            // DaoFactory.ExhibitionsDao().delete(categoryId);
+             DaoFactory.artistsDao().delete(artistId);
         }
         catch (DBException e){
-            if (e.getMessage().contains("FOREIGN KEY")){  //da li mi treba ovdje uopce???
-                throw new DBException("Deletion cannot be completed. First delete related items before deleting these rows.");
+            if (e.getMessage().contains("FOREIGN KEY")){
+                throw new DBException("First delete related items before deleting these rows.");
             }
             throw e;
         }
 
     }
 
-    public Exhibitions update(Exhibitions e) throws DBException{
-        validateExhibition_name(e.getExhibition_name());
-        // return DaoFactory.ExhibitionsDao().update(e);
+    public Artists update(Artists a) throws DBException{
+        validateFirst_name(a.getFirst_name());
+        validateLast_name(a.getLast_name());
+        validateBirthplace(a.getBirthplace());
+        validateBirth_date(a.getDate_of_birth().toLocalDate());
+         return DaoFactory.artistsDao().update(a);
     }
 
-    public List<Exhibitions> getAll() throws DBException{
-        //return DaoFactory.ExhibitionsDao().getAll();
+    public List<Artists> getAll() throws DBException{
+        return DaoFactory.artistsDao().getAll();
     }
 
 
