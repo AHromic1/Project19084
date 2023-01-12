@@ -59,12 +59,12 @@ public class HomeController {
             stage.show();
         }
         catch (Exception e){
-//            new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
-//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//            alert.setTitle("Information Dialog");
-//            alert.setHeaderText(e.getMessage());
-//
-//            alert.showAndWait();
+           new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
+           Alert alert = new Alert(Alert.AlertType.INFORMATION);
+           alert.setTitle("Information Dialog");
+          alert.setHeaderText(e.getMessage());
+
+           alert.showAndWait();
             e.printStackTrace();
         }
     }
