@@ -8,9 +8,9 @@ package ba.unsa.etf.rpr.dao;
  */
 
 public class DaoFactory {  //gdje koristiti???
-   private static final ArtistsDao artistsDao = new ArtistsSQLImplementation();
-    private static final ArtworkDao artworkDao = new ArtworkSQLImplementation();
-    private static final ExhibitionsDao exhibitionsDao = new ExhibitionsSQLImplementation();
+   private static final ArtistsDao artistsDao = ArtistsSQLImplementation.getInstance();
+    private static final ArtworkDao artworkDao = ArtworkSQLImplementation.getInstance();
+    private static final ExhibitionsDao exhibitionsDao = ExhibitionsSQLImplementation.getInstance();
 
 
     private DaoFactory(){
