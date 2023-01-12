@@ -3,7 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -38,7 +39,7 @@
                         <Insets left="30.0" right="20.0" top="40.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="addArtist">
+                  <TextField fx:id="artistName">
                      <VBox.margin>
                         <Insets left="30.0" right="20.0" top="5.0" />
                      </VBox.margin>
@@ -48,12 +49,12 @@
                         <Insets left="30.0" right="20.0" top="20.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="UpdateArtist">
+                  <TextField fx:id="artistLName">
                      <VBox.margin>
                         <Insets left="30.0" right="20.0" top="10.0" />
                      </VBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" onAction="#AddArtist" style="-fx-background-color: black; -fx-border-color: black;" text="Add " textFill="#dcd776">
+                  <Button mnemonicParsing="false" onAction="#addArtist" style="-fx-background-color: black; -fx-border-color: black;" text="Add " textFill="#dcd776">
                      <VBox.margin>
                         <Insets left="90.0" right="5.0" top="20.0" />
                      </VBox.margin>
@@ -63,7 +64,7 @@
                         <Insets left="90.0" top="20.0" />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="deleteArtist" style="-fx-background-color: black; -fx-border-color: black;" text="Delete" textFill="#dcd776">
+                  <Button mnemonicParsing="false" onAction="#deleteArtist" style="-fx-background-color: black; -fx-border-color: black;" text="Delete" textFill="#dcd776">
                      <VBox.margin>
                         <Insets left="90.0" top="20.0" />
                      </VBox.margin>
@@ -75,11 +76,15 @@
             </VBox>
          </right>
          <left>
-            <ListView prefHeight="290.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TableView prefHeight="370.0" prefWidth="151.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn prefWidth="75.0" text="First name" />
+                <TableColumn prefWidth="75.0" text="Last name" />
+              </columns>
                <BorderPane.margin>
-                  <Insets bottom="60.0" left="20.0" right="20.0" top="30.0" />
+                  <Insets bottom="58.0" left="20.0" right="20.0" top="30.0" />
                </BorderPane.margin>
-            </ListView>
+            </TableView>
          </left>
       </BorderPane>
    </children>
