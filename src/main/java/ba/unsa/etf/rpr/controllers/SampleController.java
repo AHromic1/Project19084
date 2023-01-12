@@ -20,6 +20,6 @@ public class SampleController {
     //Usernameid.getStyleClass().add("incorrect");
 
     public void OKAction(ActionEvent actionEvent) {
-       //kako otvoriti novi prozor?
+
     }
 }
