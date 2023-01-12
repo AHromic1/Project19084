@@ -29,37 +29,31 @@ public class ArtistsController {
 
         //public ObservableList<Artists> observableList = FXCollections.observableArrayList();
 
-        public ArtistsController() {
-            try {
-                observableList.addAll(artistManager.getAll());
-                System.out.println(observableList);
-            } catch (DBException e) {
-                e.printStackTrace();
-                System.out.println("Something went wrong with getAll() method from artistsManager!!!");
-            }
-        }
-
         @FXML
-        void initialize(){
+        void initialize() {
+            //try catch?
+            //try{
             refreshArtists();
-            artistsList.getSelectionModel().selectedItemProperty().addListener((obs, Old, New)->{
-                if (New != null){
-                    artistName.setText(New.getLast_name());
+            artistsList.getSelectionModel().selectedItemProperty().addListener((obs, Old, New) -> {
+                if (New != null) {
+                    artistName.setText(New.getName());
                 }
             });
-            catch (DBException e) {
-                throw new RuntimeException(e);
-            }
+
+        //} catch (DBException e) {
+            //            new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
+            //        }
 
         }
+        //2 listenera?
 
     public void addArtist(ActionEvent event){
         try {
             Artists a = new Artists();
-            a.setFirst_name(addArtist.getText());
+            a.setName(artistName.getText());
             a = artistManager.add(a);
-            categoriesList.getItems().add(a);
-            addArtist.setText("");
+            artistsList.getItems().add(a);
+            artistName.setText("");
             refreshArtists();
         }
         catch (DBException e){
@@ -69,33 +63,34 @@ public class ArtistsController {
 
     public void updateArtist(ActionEvent event){
         try {
-            Artists cat = categoriesList.getSelectionModel().getSelectedItem();
-            cat.setName(categoryName.getText());
-            cat = manager.update(cat);
+            Artists a = artistsList.getSelectionModel().getSelectedItem();
+            a.setName(artistName.getText());
+            a = artistManager.update(a);
             refreshArtists();
-        }catch (DBException e){
+        }
+        catch (DBException e){
             new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
         }
     }
 
     public void deleteArtist(ActionEvent event){
         try {
-            Category cat = categoriesList.getSelectionModel().getSelectedItem();
-            manager.delete(cat.getId());
-            //refreshCategories();
-            categoriesList.getItems().remove(cat); // perf optimization
-        }catch (QuoteException e){
+            Artists a = artistsList.getSelectionModel().getSelectedItem();
+            ArtistsManager.delete(a.getId());
+            refreshArtists();
+            artistsList.getItems().remove(a); // performance optimization
+            //refresh?
+        }
+        catch (DBException e){
             new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
         }
     }
 
 
-
-
         private void refreshArtists(){
             try {
-                artistsTable.setItems(FXCollections.observableList(artistManager.getAll()));
-                artistsTable.refresh();
+                artistsList.setItems(FXCollections.observableList(artistManager.getAll()));
+                artistName.setText("");
             } catch (DBException e) {
                 new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
             }
