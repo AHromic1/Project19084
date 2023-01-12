@@ -27,8 +27,8 @@ public class App
 
        Artists artist = new Artists();
        artist.setId(20);
-       artist.setFirst_name("Gustav");
-       artist.setLast_name("Klimt");
+       //artist.setFirst_name("Gustav");
+       //artist.setLast_name("Klimt");
        artist.setBirthplace("Austria");
        // Date firstDate1 = new Date(2001, 11, 1);  //koristiti calendar
 
