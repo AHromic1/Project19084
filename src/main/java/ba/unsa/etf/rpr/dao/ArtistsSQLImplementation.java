@@ -37,8 +37,7 @@ public class ArtistsSQLImplementation extends AbstractDao<Artists> implements Ar
         try {
             Artists artist = new Artists();
             artist.setId(rs.getInt("Id"));
-            artist.setFirst_name(rs.getString("First_name"));
-            artist.setLast_name(rs.getString("Last_name"));
+            artist.setName(rs.getString("First_name"));
             artist.setBirthplace(rs.getString("Birthplace"));
             artist.setDate_of_birth(rs.getDate("Date_od_Birth"));
             return artist;
@@ -52,8 +51,7 @@ public class ArtistsSQLImplementation extends AbstractDao<Artists> implements Ar
     public Map<String, Object> object2row(Artists object) {
         Map<String, Object> row = new TreeMap<>();
         row.put("Id", object.getId());
-        row.put("First_name", object.getFirst_name());
-        row.put("Last_name", object.getLast_name());
+        row.put("Name", object.getName());
         row.put("Birthplace", object.getBirthplace());
         row.put("Date_of_Birth", object.getDate_of_birth()); //nazivi se moraju poklapati?
         return row;
