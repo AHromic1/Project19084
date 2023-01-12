@@ -36,7 +36,6 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" top="15.0" />
                      </HBox.margin>
                   </DatePicker>
-                  <DatePicker fx:id="d2" editable="false" onAction="#SearchByDate" />
                </children>
             </HBox>
          </top>
