@@ -45,7 +45,7 @@
                         <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                 </Menu>
-                <Menu onAction="#openHelp" text="_Help">
+                <Menu  text="_Help" onAction="#openHelp">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="H" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></Menu>
@@ -66,7 +66,7 @@
             </Label>
          </left>
          <right>
-            <Button defaultButton="true" mnemonicParsing="false" style="-fx-background-color: skyblue;" text="Want to see more?" onAction="#openPaintings" underline="true" BorderPane.alignment="CENTER">
+            <Button defaultButton="true" mnemonicParsing="false" style="-fx-background-color: skyblue;" text="Want to see more?" onAction="#openArtwork" underline="true" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </BorderPane.margin>
@@ -118,7 +118,7 @@
                               <Insets left="150.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </Label>
-                        <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="34.0">
+                        <Button mnemonicParsing="false" onAction="#openEmail" prefHeight="20.0" prefWidth="34.0">
                            <graphic>
                               <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
