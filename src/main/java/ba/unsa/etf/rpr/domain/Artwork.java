@@ -1,14 +1,15 @@
 package ba.unsa.etf.rpr.domain;
 
 import java.util.Objects;
+import ba.unsa.etf.rpr.domain.Exhibitions;
 
 public class Artwork implements Idable{
     private int Id;
     private String Name;
     private String Era;
     private double Price;
-    private int Exhibition_FK;
-    private int Artists_FK;  //artists foreign key
+    private Exhibitions exhibition;
+    private Artists artist;  //artists foreign key
 
 
     public void setName(String name) {
@@ -19,20 +20,8 @@ public class Artwork implements Idable{
         Era = era;
     }
 
-    public int getArtists_FK() {
-        return Artists_FK;
-    }
-
-    public void setArtists_FK(int art_FK) {
-        Artists_FK = art_FK;
-    }
-
     public void setPrice(double price) {
         Price = price;
-    }
-
-    public void setExhibition_FK(int exhibition_FK) {
-        Exhibition_FK = exhibition_FK;
     }
 
     public String getName() {
@@ -48,19 +37,9 @@ public class Artwork implements Idable{
         return Price;
     }
 
-    public int getExhibition_FK() {
-        return Exhibition_FK;
-    }
     @Override
     public String toString() {
-        return "Artwork{" +
-                "Artwork_id=" + Id +
-                ", Name='" + Name + '\'' +
-                ", Era='" + Era + '\'' +
-                ", Price=" + Price +
-                ", Exhibition_FK=" + Exhibition_FK +
-                ", Artists_FK=" + Artists_FK +
-                "}";  //zasto ' '
+        return getName();
     }
 
     @Override
@@ -73,7 +52,7 @@ public class Artwork implements Idable{
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, Name, Era, Price, Exhibition_FK, Artists_FK);
+        return Objects.hash(Id, Name, Era, Price);
     }
 
     @Override
