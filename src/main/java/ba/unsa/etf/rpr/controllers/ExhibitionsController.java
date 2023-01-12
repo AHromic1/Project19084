@@ -29,35 +29,33 @@ public class ExhibitionsController {
     @FXML
 
     public DatePicker date;
-    public DatePicker d2;
     public TableView<Exhibitions> exhibitionsTable = new TableView<>();
     public TableColumn<Exhibitions, String> Exhibition = new TableColumn<>();
-    public TableColumn<Exhibitions, String> Art;  //ovo je fk, kako?
     public TableColumn<Exhibitions, String> Location = new TableColumn<>();
     public TableColumn<Exhibitions, Date> Start = new TableColumn<>();
     public TableColumn<Exhibitions, Date> End = new TableColumn<>();
     public ObservableList<Exhibitions> observableList = FXCollections.observableArrayList();  //treba observable list da bi se moglo proslijediti
 
     public ExhibitionsController() {
-//        try {
-//            observableList.addAll(exhibitionManager.getAll());
-//            System.out.println(observableList);
-//        } catch (DBException e) {
-//            e.printStackTrace();
-//            System.out.println("Something went wrong with getAll() method from exhibitionManager!!!");
-//        }//konstruktor da bi se mogao otvoriti kontroler
+       try {
+            observableList.addAll(exhibitionManager.getAll());
+            System.out.println(observableList);
+       } catch (DBException e) {
+           e.printStackTrace();
+          System.out.println("Something went wrong with getAll() method from exhibitionManager!!!");
+       }//konstruktor da bi se mogao otvoriti kontroler
     }
 
     @FXML
     void initialize(){
         Exhibition.setCellValueFactory(new PropertyValueFactory<Exhibitions, String>("Exhibition_name"));  //kol u workbench
-       // Art.setCellValueFactory(new PropertyValueFactory<E, String>("quote"));  KAKO?
         Location.setCellValueFactory(new PropertyValueFactory<Exhibitions, String>("Location"));
         Start.setCellValueFactory(new PropertyValueFactory<Exhibitions, Date>("Start_date"));
         End.setCellValueFactory(new PropertyValueFactory<Exhibitions, Date>("End_date"));
         try {
             exhibitionsTable.setItems(FXCollections.observableList(exhibitionManager.getAll()));
-        } catch (DBException e) {
+        }
+        catch (DBException e) {
             throw new RuntimeException(e);
         }
         date.editorProperty().addListener((obs, oldValue, newValue) -> {
@@ -68,7 +66,7 @@ public class ExhibitionsController {
 
    public void SearchByDate(ActionEvent event){
         try {
-            exhibitionsTable.setItems(FXCollections.observableList(exhibitionManager.SearchByDate(Date.valueOf(date.getValue()), Date.valueOf(d2.getValue()))));
+            exhibitionsTable.setItems(FXCollections.observableList(exhibitionManager.SearchByDate(Date.valueOf(date.getValue()))));
             exhibitionsTable.refresh();
         }
         catch (DBException e) {
