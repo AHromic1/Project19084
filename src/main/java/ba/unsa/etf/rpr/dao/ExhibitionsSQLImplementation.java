@@ -58,8 +58,8 @@ public class ExhibitionsSQLImplementation extends AbstractDao<Exhibitions> imple
     }
 
    @Override
-    public List<Exhibitions> SearchByDate(Date start, Date end) throws DBException {
-        return executeQuery("SELECT * FROM Exhibitions WHERE Start_date > ?", new Object[]{start, end});
+    public List<Exhibitions> SearchByDate(Date d) throws DBException {
+        return executeQuery("SELECT * FROM Exhibitions WHERE ? > Start_date AND ? < End_date", new Object[]{d, d});
     }
 
 
