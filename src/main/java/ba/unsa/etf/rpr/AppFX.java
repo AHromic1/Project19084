@@ -1,24 +1,22 @@
 package ba.unsa.etf.rpr;
 
+import ba.unsa.etf.rpr.controllers.HomeController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-
-import javax.swing.*;
-
-import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
 public class AppFX extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{  //prima stage
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/myGUI.fxml"));  //u sample su labele, buttons i sl
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"));  //u sample su labele, buttons i sl
         ///fxml - usli u fxml , a getResource dobavlja file iz resources
-
+        HomeController homeController = new HomeController();
+        fxmlLoader.setController(homeController);
+        Parent root = fxmlLoader.load();
        /* Image image = new Image("/img/gallery1.jpg");
         ImageView mv = new ImageView(image);*/
         Scene scena = new Scene(root, Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
