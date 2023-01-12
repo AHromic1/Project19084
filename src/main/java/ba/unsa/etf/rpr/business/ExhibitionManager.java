@@ -132,8 +132,8 @@ public class ExhibitionManager {
         return DaoFactory.exhibitionsDao().getAll();
     }
 
-    public List<Exhibitions> SearchByDate(Date start, Date end) throws DBException{
-        return DaoFactory.exhibitionsDao().SearchByDate(start, end);
+    public List<Exhibitions> SearchByDate(Date d) throws DBException{
+        return DaoFactory.exhibitionsDao().SearchByDate(d);
     }
 }
 
