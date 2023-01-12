@@ -10,10 +10,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class ExhibitionsSQLImplementation extends AbstractDao<Exhibitions> implements Dao<Exhibitions> {
+public class ExhibitionsSQLImplementation extends AbstractDao<Exhibitions> implements ExhibitionsDao {
 
+    private static ExhibitionsSQLImplementation instance = null;
     public ExhibitionsSQLImplementation() {
+
         super("Exhibitions");
+    }
+
+    public static ExhibitionsSQLImplementation getInstance(){
+        if(instance==null)
+            instance = new ExhibitionsSQLImplementation();
+        return instance;
+    }
+
+    public static void removeInstance(){
+        if(instance!=null)
+            instance=null;
     }
 
     @Override
@@ -44,8 +57,10 @@ public class ExhibitionsSQLImplementation extends AbstractDao<Exhibitions> imple
         return item;
     }
 
-   // @Override ?
-    public List<Exhibitions> getByDateRange(Date start, Date end) throws DBException {
-        return executeQuery("SELECT * FROM quote_history WHERE generated BETWEEN ? AND ?", new Object[]{start, end});
+   @Override
+    public List<Exhibitions> SearchByDate(Date start, Date end) throws DBException {
+        return executeQuery("SELECT * FROM Exhibitions WHERE Start_date > ?", new Object[]{start, end});
     }
+
+
 }
