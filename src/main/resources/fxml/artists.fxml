@@ -3,8 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,7 +14,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #dcd776;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="337.0" fitWidth="463.0" layoutX="4.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="282.0" fitWidth="399.0" layoutX="4.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/goghcollection.jpg" />
          </image>
@@ -31,58 +30,57 @@
                </font>
             </Label>
          </top>
-         <bottom>
-            <Label text="Label" BorderPane.alignment="CENTER" />
-         </bottom>
-         <left>
-            <TableView fx:id="artistsTable" prefHeight="365.0" prefWidth="304.0" BorderPane.alignment="CENTER">
-              <columns>
-                <TableColumn fx:id="fname" prefWidth="75.0" text="First Name" />
-                <TableColumn fx:id="lname" prefWidth="75.0" text="Last Name" />
-                  <TableColumn fx:id="bplace" prefWidth="75.0" text="Birthplace" />
-                  <TableColumn fx:id="bdate" prefWidth="75.0" text="Birthdate" />
-              </columns>
-               <BorderPane.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </BorderPane.margin>
-            </TableView>
-         </left>
          <right>
             <VBox prefHeight="346.0" prefWidth="207.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button onAction="#AddArtist" mnemonicParsing="false" style="-fx-background-color: #dcd776; -fx-border-color: black;" text="Add an artist">
+                  <Label style="-fx-background-color: black; -fx-border-color: black;" text="First name" textFill="#dcd776">
                      <VBox.margin>
-                        <Insets left="30.0" right="5.0" top="30.0" />
+                        <Insets left="30.0" right="20.0" top="40.0" />
                      </VBox.margin>
-                  </Button>
+                  </Label>
                   <TextField fx:id="addArtist">
                      <VBox.margin>
-                        <Insets left="30.0" right="20.0" top="20.0" />
+                        <Insets left="30.0" right="20.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
-                  <Button onAction="#updateArtist" mnemonicParsing="false" style="-fx-background-color: #dcd776; -fx-border-color: black;" text="Update ">
+                  <Label style="-fx-background-color: black; -fx-border-color: black;" text="Last name" textFill="#dcd776">
                      <VBox.margin>
-                        <Insets left="30.0" top="50.0" />
+                        <Insets left="30.0" right="20.0" top="20.0" />
                      </VBox.margin>
-                  </Button>
+                  </Label>
                   <TextField fx:id="UpdateArtist">
                      <VBox.margin>
-                        <Insets left="30.0" right="20.0" top="20.0" />
+                        <Insets left="30.0" right="20.0" top="10.0" />
                      </VBox.margin>
                   </TextField>
-                  <Button onAction="deleteArtist" mnemonicParsing="false" style="-fx-background-color: #dcd776; -fx-border-color: black;" text="Delete">
+                  <Button mnemonicParsing="false" onAction="#AddArtist" style="-fx-background-color: black; -fx-border-color: black;" text="Add " textFill="#dcd776">
                      <VBox.margin>
-                        <Insets left="30.0" top="20.0" />
+                        <Insets left="90.0" right="5.0" top="20.0" />
                      </VBox.margin>
                   </Button>
-                  <TextField fx:id="DeleteArtist">
+                  <Button mnemonicParsing="false" onAction="#updateArtist" style="-fx-background-color: black; -fx-border-color: black;" text="Update " textFill="#dcd776">
                      <VBox.margin>
-                        <Insets left="30.0" right="20.0" top="20.0" />
+                        <Insets left="90.0" top="20.0" />
                      </VBox.margin>
-                  </TextField>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="deleteArtist" style="-fx-background-color: black; -fx-border-color: black;" text="Delete" textFill="#dcd776">
+                     <VBox.margin>
+                        <Insets left="90.0" top="20.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
             </VBox>
          </right>
+         <left>
+            <ListView prefHeight="290.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="60.0" left="20.0" right="20.0" top="30.0" />
+               </BorderPane.margin>
+            </ListView>
+         </left>
       </BorderPane>
    </children>
 </Pane>
