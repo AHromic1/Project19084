@@ -11,28 +11,20 @@ public class Artists implements Idable
 
     //java beans? sta da radim s imenima, da li da mijenjam i ovdje i u bazi podataka ?
     private static int Id ;
-    private static String First_name;
-    private static String Last_name;
+    private static String Name;
     private static String Birthplace;
     private static Date Date_of_birth;
 
 
 
-    public String getFirst_name() {
-        return First_name;
+    public String getName() {
+        return Name;
     }
 
-    public static void setFirst_name(String first_name) {
-        First_name = first_name;
+    public static void setName(String first_name) {
+        Name = first_name;
     }
 
-    public String getLast_name() {
-        return Last_name;
-    }
-
-    public static void setLast_name(String last_name) {
-        Last_name = last_name;
-    }
 
     public String getBirthplace() {
         return Birthplace;
@@ -57,21 +49,20 @@ public class Artists implements Idable
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Artists artists = (Artists) o;  //objest turned into Artists
-        return Id == artists.Id &&  First_name.equals(artists.First_name) &&
-                Last_name.equals(artists.Last_name) && Birthplace.equals(artists.Birthplace) && Date_of_birth.equals(artists.Date_of_birth);
+        return Id == artists.Id &&  Name.equals(artists.Name) &&
+                 Birthplace.equals(artists.Birthplace) && Date_of_birth.equals(artists.Date_of_birth);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, First_name, Last_name, Birthplace, Date_of_birth);
+        return Objects.hash(Id, Name, Birthplace, Date_of_birth);
     }
 
     @Override
     public String toString() {
         return "Artists{" +
                 "Artist_id=" + Id +
-                ", First_name='" + First_name + '\'' +
-                ", Last_name='" + Last_name + '\'' +
+                ", First_name='" + Name + '\'' +
                 ", Birthplace='" + Birthplace + '\'' +
                 ", Date_of_birth=" + Date_of_birth +
                 "}";
