@@ -35,7 +35,7 @@ public class App
        Calendar c = new GregorianCalendar();
        c.set(1812, 12, 12);
        Date firstDate1 =  c.getTime();
-       artist.setDate_of_birth(firstDate1);
+       ////artist.setDate_of_birth(firstDate1);
 
 
 
