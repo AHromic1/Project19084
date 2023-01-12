@@ -58,9 +58,9 @@ public class ExhibitionsController {
         catch (DBException e) {
             throw new RuntimeException(e);
         }
-        date.editorProperty().addListener((obs, oldValue, newValue) -> {
+       /* date.editorProperty().addListener((obs, oldValue, newValue) -> {
             System.out.println(newValue.toString());
-        });
+        });*/
     }
 
 
