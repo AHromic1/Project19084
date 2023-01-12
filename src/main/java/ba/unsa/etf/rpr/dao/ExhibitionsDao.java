@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ExhibitionsDao extends Dao<Exhibitions>  {
 
-    List<Exhibitions> SearchByDate(Date start, Date end) throws DBException;
+    List<Exhibitions> SearchByDate(Date d) throws DBException;
 
 
 }
