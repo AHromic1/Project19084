@@ -87,7 +87,7 @@ public class ArtistsManager {
         }
     }
 
-    public void delete(int artistId) throws DBException{
+    public static void delete(int artistId) throws DBException{
         try{
              DaoFactory.artistsDao().delete(artistId);
         }
