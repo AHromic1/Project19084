@@ -4,6 +4,7 @@ import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Artists;
 import ba.unsa.etf.rpr.domain.Artwork;
 import ba.unsa.etf.rpr.exceptions.DBException;
+import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
 import java.time.Year;
@@ -75,4 +76,6 @@ public class ArtworkManager {
     }
 
 
+   /* public ObservableList<Artwork> getName() {
+    }*/
 }
