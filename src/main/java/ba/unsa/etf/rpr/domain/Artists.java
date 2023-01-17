@@ -23,8 +23,6 @@ public class Artists implements Idable
     }
 
 
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
