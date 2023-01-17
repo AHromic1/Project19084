@@ -17,7 +17,7 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 public class HomeController {
 
     public void openHelp(ActionEvent actionEvent){
-        openDialog("Help", "/fxml/help.fxml", null);
+        openDialog("Help", "/fxml/help.fxml", new Help());
 
     }
 
@@ -26,10 +26,6 @@ public class HomeController {
     }
 
     public void openArtists(ActionEvent actionEvent){
-        openDialog("Artists", "/fxml/artists.fxml", new ArtistsController());
-    }
-
-    public void openSuggestions(ActionEvent actionEvent){
         openDialog("Artists", "/fxml/artists.fxml", new ArtistsController());
     }
 
