@@ -91,7 +91,8 @@ public class ArtistsController {
             try {
                 artistsList.setItems(FXCollections.observableList(artistManager.getAll()));
                 artistName.setText("");
-            } catch (DBException e) {
+            }
+            catch (DBException e) {
                 new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
             }
         }
