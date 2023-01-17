@@ -28,24 +28,20 @@
               <menus>
                 <Menu text="_Options">
                   <items>
-                      <MenuItem  text="Upcoming _exhibitions" onAction="#openExhibitions">
+                      <MenuItem onAction="#openExhibitions" text="Upcoming _exhibitions">
                            <accelerator>
                               <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                            </accelerator></MenuItem>
-                        <MenuItem text="_Pictura artists" onAction="#openArtists">
+                        <MenuItem onAction="#openArtists" text="Pictura _artists">
                            <accelerator>
                               <KeyCodeCombination alt="UP" code="A" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                           </accelerator></MenuItem>
-                        <MenuItem text="Your _suggestions" onAction="#openSuggestions">
-                           <accelerator>
-                              <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                            </accelerator></MenuItem>
                   </items>
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                 </Menu>
-                <Menu  text="_Help" onAction="#openHelp">
+                <Menu onAction="#openHelp" text="_Help">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="H" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></Menu>
@@ -66,7 +62,7 @@
             </Label>
          </left>
          <right>
-            <Button defaultButton="true" mnemonicParsing="false" style="-fx-background-color: skyblue;" text="Want to see more?" onAction="#openArtwork" underline="true" BorderPane.alignment="CENTER">
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#openArtwork" style="-fx-background-color: skyblue;" text="Want to see more?" underline="true" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </BorderPane.margin>
