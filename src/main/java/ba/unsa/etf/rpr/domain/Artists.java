@@ -18,8 +18,8 @@ public class Artists implements Idable
         return Name;
     }
 
-    public static void setName(String first_name) {
-        Name = first_name;
+    public static void setName(String name) {
+        Name = name;
     }
 
 
@@ -38,10 +38,9 @@ public class Artists implements Idable
 
     @Override
     public String toString() {
-        return "Artists{" +
-                "Artist_id=" + Id +
-                ", First_name='" + Name + '\'' +
-                "}";
+        return
+                " Name: " + Name
+                ;
     }
 
     @Override
