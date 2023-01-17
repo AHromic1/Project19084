@@ -37,6 +37,22 @@ public class Artwork implements Idable{
         return Price;
     }
 
+    public Exhibitions getExhibition() {
+        return exhibition;
+    }
+
+    public void setExhibition(Exhibitions exhibition) {
+        this.exhibition = exhibition;
+    }
+
+    public Artists getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artists artist) {
+        this.artist = artist;
+    }
+
     @Override
     public String toString() {
         return getName();
@@ -47,12 +63,12 @@ public class Artwork implements Idable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Artwork artwork = (Artwork) o;
-        return Id == artwork.Id && Double.compare(artwork.Price, Price) == 0 && Exhibition_FK == artwork.Exhibition_FK && Artists_FK == artwork.Artists_FK && Name.equals(artwork.Name) && Era.equals(artwork.Era);
+        return Id == artwork.Id && Double.compare(artwork.Price, Price) == 0 && Name.equals(artwork.Name) && Era.equals(artwork.Era) && exhibition.equals(artwork.exhibition) && artist.equals(artwork.artist);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, Name, Era, Price);
+        return Objects.hash(Id, Name, Era, Price, exhibition, artist);
     }
 
     @Override
