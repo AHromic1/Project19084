@@ -37,7 +37,7 @@ public class ArtistsSQLImplementation extends AbstractDao<Artists> implements Ar
         try {
             Artists artist = new Artists();
             artist.setId(rs.getInt("Id"));
-            artist.setName(rs.getString("First_name"));
+            artist.setName(rs.getString("Name"));
             return artist;
         }
         catch (SQLException e) {
