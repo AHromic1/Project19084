@@ -29,7 +29,7 @@ public class App
        artist.setId(20);
        //artist.setFirst_name("Gustav");
        //artist.setLast_name("Klimt");
-       artist.setBirthplace("Austria");
+
        // Date firstDate1 = new Date(2001, 11, 1);  //koristiti calendar
 
        Calendar c = new GregorianCalendar();
