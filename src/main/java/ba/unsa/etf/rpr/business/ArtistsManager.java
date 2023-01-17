@@ -79,8 +79,6 @@ public class ArtistsManager {
 
     public Artists update(Artists a) throws DBException{
         validateName(a.getName());
-        validateBirthplace(a.getBirthplace());
-        validateBirth_date(a.getDate_of_birth().toLocalDate());
          return DaoFactory.artistsDao().update(a);
     }
 
