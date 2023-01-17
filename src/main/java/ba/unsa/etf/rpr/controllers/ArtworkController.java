@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.ArtworkManager;
+import ba.unsa.etf.rpr.domain.Artists;
 import ba.unsa.etf.rpr.domain.Artwork;
 import ba.unsa.etf.rpr.domain.Exhibitions;
 import ba.unsa.etf.rpr.exceptions.DBException;
@@ -76,15 +77,15 @@ public void initialize(){
         public SimpleObjectProperty<String> Name = new SimpleObjectProperty<String>();
         public SimpleObjectProperty<String> Era = new SimpleObjectProperty<String>();
         public SimpleStringProperty Price;
-        public SimpleObjectProperty<String> Exhibition = new SimpleObjectProperty<String>(); //name
-        public SimpleObjectProperty<String> Artist = new SimpleObjectProperty<String>();  //name
+        public SimpleObjectProperty<Exhibitions> Exhibition = new SimpleObjectProperty<Exhibitions>(); //name
+        public SimpleObjectProperty<Artists> Artist = new SimpleObjectProperty<Artists>();  //name
 
         public void fromArtwork(Artwork a){
             this.Name.set(a.getName());
             this.Era.set(a.getEra());
             this.Price = new SimpleStringProperty(String.valueOf(a.getPrice()));
-           // this.Artist.set() kako?
-           // this.Exhibition.set()  kako?
+            this.Artist.set(a.getArtist());
+            this.Exhibition.set(a.getExhibition()); //  kako?
         }
 
         public Artwork toArtwork(){
@@ -92,8 +93,8 @@ public void initialize(){
             a.setName(this.Name.getValue());
             a.setEra(this.Era.getValue());
             a.setPrice(Double.parseDouble(Price.get()));
-          //  a.setE(this.Exhibition.getValue());
-            //artist/exhibition kako???
+            a.setExhibition(this.Exhibition.getValue());
+            a.setArtist(this.Artist.getValue());
             return a;
         }
     }
