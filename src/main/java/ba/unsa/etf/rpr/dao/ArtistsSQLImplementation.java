@@ -38,8 +38,6 @@ public class ArtistsSQLImplementation extends AbstractDao<Artists> implements Ar
             Artists artist = new Artists();
             artist.setId(rs.getInt("Id"));
             artist.setName(rs.getString("First_name"));
-            artist.setBirthplace(rs.getString("Birthplace"));
-            artist.setDate_of_birth(rs.getDate("Date_od_Birth"));
             return artist;
         }
         catch (SQLException e) {
@@ -52,8 +50,7 @@ public class ArtistsSQLImplementation extends AbstractDao<Artists> implements Ar
         Map<String, Object> row = new TreeMap<>();
         row.put("Id", object.getId());
         row.put("Name", object.getName());
-        row.put("Birthplace", object.getBirthplace());
-        row.put("Date_of_Birth", object.getDate_of_birth()); //nazivi se moraju poklapati?
+       //nazivi se moraju poklapati?
         return row;
     }
 
