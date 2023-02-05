@@ -16,7 +16,7 @@ public class ArtworkSQLImplementation extends AbstractDao<Artwork> implements Ar
         super("Artwork");
     }
 
-    public static ArtworkSQLImplementation getInstance(){
+    public static ArtworkSQLImplementation getInstance(){ //jedna instanca klase
         if(instance==null)
             instance = new ArtworkSQLImplementation();
         return instance;
