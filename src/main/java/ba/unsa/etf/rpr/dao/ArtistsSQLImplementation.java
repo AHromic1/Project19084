@@ -48,7 +48,7 @@ public class ArtistsSQLImplementation extends AbstractDao<Artists> implements Ar
     @Override
     public Map<String, Object> object2row(Artists object) {
         Map<String, Object> row = new TreeMap<>();
-        row.put("Id", object.getId());
+        //row.put("Id", object.getId());
         row.put("Name", object.getName());
        //nazivi se moraju poklapati?
         return row;
