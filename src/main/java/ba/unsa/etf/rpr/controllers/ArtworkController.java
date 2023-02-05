@@ -61,8 +61,8 @@ public void initialize(){
                 } else {
                     era.textProperty().bindBidirectional(model.Era);
                     price.textProperty().bindBidirectional(model.Price);
-                    artist.textProperty().bindBidirectional(model.Artist);
-                    exhibition.textProperty().bindBidirectional(model.Exhibition);
+                  //  artist.textProperty().bindBidirectional(model.Artist);
+                  //  exhibition.textProperty().bindBidirectional(model.Exhibition);
                 }
             });
 
@@ -75,17 +75,23 @@ public void initialize(){
     public class ArtworkModel{
        // public SimpleStringProperty art = new SimpleStringProperty("");
         public SimpleObjectProperty<String> Name = new SimpleObjectProperty<String>();
+        //ne moze obican string  - pravilo
         public SimpleObjectProperty<String> Era = new SimpleObjectProperty<String>();
         public SimpleStringProperty Price;
-        public SimpleObjectProperty<Exhibitions> Exhibition = new SimpleObjectProperty<Exhibitions>(); //name
-        public SimpleObjectProperty<Artists> Artist = new SimpleObjectProperty<Artists>();  //name
+        public SimpleStringProperty Exhibition ;
+       // public SimpleObjectProperty<Exhibitions> Exhibition = new SimpleObjectProperty<Exhibitions>(); //name
+       public SimpleStringProperty Artist ;
+       // public SimpleObjectProperty<Artists> Artist = new SimpleObjectProperty<Artists>();  //name
 
+        //kao objtorow i obnuto
         public void fromArtwork(Artwork a){
             this.Name.set(a.getName());
             this.Era.set(a.getEra());
             this.Price = new SimpleStringProperty(String.valueOf(a.getPrice()));
-            this.Artist.set(a.getArtist());
-            this.Exhibition.set(a.getExhibition()); //  kako?
+            this.Artist = new SimpleStringProperty(String.valueOf(a.getArtist()));
+            //this.Artist.set(a.getArtist());
+            this.Exhibition = new SimpleStringProperty(String.valueOf(a.getExhibition()));
+            //this.Exhibition.set(a.getExhibition()); //  kako?
         }
 
         public Artwork toArtwork(){
@@ -93,8 +99,8 @@ public void initialize(){
             a.setName(this.Name.getValue());
             a.setEra(this.Era.getValue());
             a.setPrice(Double.parseDouble(Price.get()));
-            a.setExhibition(this.Exhibition.getValue());
-            a.setArtist(this.Artist.getValue());
+           // a.setExhibition(this.Exhibition.getValue());  //?
+         //   a.setArtist(this.Artist.getValue());
             return a;
         }
     }
