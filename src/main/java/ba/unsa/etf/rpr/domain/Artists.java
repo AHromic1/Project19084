@@ -13,6 +13,12 @@ public class Artists implements Idable
     private static int Id ;
     private static String Name;
 
+    public Artists(String name) {
+        this.Name = name;
+    }
+
+    public Artists() {
+    }
 
     public String getName() {
         return Name;
@@ -39,7 +45,7 @@ public class Artists implements Idable
     @Override
     public String toString() {
         return
-                " Name: " + Name
+                Name
                 ;
     }
 
