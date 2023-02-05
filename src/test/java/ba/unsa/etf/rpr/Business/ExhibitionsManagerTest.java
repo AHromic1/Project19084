@@ -57,9 +57,32 @@ public class ExhibitionsManagerTest {
         assertThrows( DBException.class, ()->exhibitionsManager.validateExhibition_name(name), "Exhibition name cannot be longer than 50 or shorter than 1 character!");
     }
 
-        @Test void validateLocation(){
+    @Test void validateLocation(){
         String loc = "";
         assertThrows( DBException.class, ()->exhibitionsManager.validateLocation(loc), "Location name cannot be longer than 50 or shorter than 1 character!");
+    }
+
+    @Test void validateStart_date(){
+        LocalDate date = LocalDate.of(-2025, 1, 1);
+        assertThrows( DBException.class, ()->exhibitionsManager.validateEnd_date(date), "Invalid date!");
+    }
+    @Test void validateEnd_date(){
+        LocalDate date = LocalDate.of(2020, 1, 1);
+        assertThrows( DBException.class, ()->exhibitionsManager.validateEnd_date(date), "Invalid date!");
+    }
+
+    @Test
+    void add() throws DBException {
+        Exhibitions e = new Exhibitions();
+        e.setExhibition_name("Early work of da Vinci");
+        LocalDate s_date = LocalDate.of(2023, 1, 1);
+        e.setStart_date(Date.valueOf(s_date));
+        LocalDate e_date = LocalDate.of(2023, 3, 1);
+        e.setEnd_date(Date.valueOf(e_date));
+        e.setLocation("London");
+
+        Exhibitions result = exhibitionsManager.add(e);
+        assertEquals(e,result);
     }
 
 
