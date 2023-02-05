@@ -9,6 +9,7 @@ public class DBException extends Exception{
         super(message, e);
     }
     public DBException(String message){
+
         super(message);
     }
 }
