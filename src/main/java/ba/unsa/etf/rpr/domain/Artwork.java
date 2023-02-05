@@ -11,8 +11,8 @@ public class Artwork implements Idable{
     private Exhibitions exhibition;
     private Artists artist;  //artists foreign key
 
-    public Artwork(String name, String era, double price, Exhibitions exhibition, Artists artist) {
-        //Id = id;
+    public Artwork(int id, String name, String era, double price, Exhibitions exhibition, Artists artist) {
+        Id = id;
         Name = name;
         Era = era;
         Price = price;
