@@ -69,7 +69,7 @@ public class ExhibitionManager {
         int dd = start.getDayOfMonth();
         int day = LocalDate.now().getDayOfMonth();
 
-        if (start == null //|| !validateDate(start)
+        if (start == null || !validateDate(start)
                 ||  m < 0 || dd < 0 || y < 0) {
             throw new DBException("Invalid date!");
         }
@@ -87,7 +87,7 @@ public class ExhibitionManager {
 
 
 
-        if (end == null //|| !validateDate(end)
+        if (end == null || !validateDate(end)
                 || m < 0 || dd < 0 || y < 0 ||
                 y < Year.now().getValue()
                 ||( y == Year.now().getValue() && m < LocalDate.now().getMonthValue())
