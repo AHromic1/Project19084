@@ -1,51 +1,113 @@
 package ba.unsa.etf.rpr;
 
-import ba.unsa.etf.rpr.dao.ArtistsSQLImplementation;
+import ba.unsa.etf.rpr.business.ArtistsManager;
+import ba.unsa.etf.rpr.business.ArtworkManager;
+import ba.unsa.etf.rpr.business.ExhibitionManager;
 import ba.unsa.etf.rpr.domain.Artists;
-import ba.unsa.etf.rpr.exceptions.DBException;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import ba.unsa.etf.rpr.domain.Artwork;
+import org.apache.commons.cli.*;
+import java.io.PrintWriter;
+import java.util.*;
 
-import java.util.Date;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-import static javafx.application.Application.launch;
-import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 /**
- * Hello world!
+ * @author Amina Hromic
+ * CLI (Command Line Interface) implementation in following class
+ * Even though this type of presentation layer (called CLI) is becoming past tense for GUI apps
+ * it's good to see how you can manipulate data through command line and database also
  *
  */
-public class App
-{
-   public static void main( String[] args )
-   {
-
-       Artists artist = new Artists();
-       artist.setId(20);
-       //artist.setFirst_name("Gustav");
-       //artist.setLast_name("Klimt");
-
-       // Date firstDate1 = new Date(2001, 11, 1);  //koristiti calendar
-
-       Calendar c = new GregorianCalendar();
-       c.set(1812, 12, 12);
-       Date firstDate1 =  c.getTime();
-       ////artist.setDate_of_birth(firstDate1);
+public class App {
+    /**
+     * Defining final variables to describe all code having options
+     */
+    private static final Option addArtist = new Option("aa","add-artist",false, "Adding a new artist to the art gallery database");
+    private static final Option getExhibitions = new Option("ge","get-exhibition",false, "Printing all exhibitions in the art gallery database");
+    private static final Option getArtists = new Option("ga", "get-artists",false, "Printing all artists from the art gallery database");
+    private static final Option getPaintings = new Option("gp", "get-paintings",false, "Printing all paintings from the art gallery database");
 
 
 
-       ArtistsSQLImplementation t = new ArtistsSQLImplementation();
-       //t.add(artist);  unhandled exception?
-       System.out.println( "Hello World!" );
+    /**
+     *
+     * @param options
+     *
+     */
+    public static void printFormattedOptions(Options options) {
+        HelpFormatter helpFormatter = new HelpFormatter();
+        PrintWriter printWriter = new PrintWriter(System.out);
+        helpFormatter.printUsage(printWriter, 150, "java -jar Project.jar [option] 'something else if needed' ");
+        helpFormatter.printOptions(printWriter, 150, options, 2, 7);
+        printWriter.close();
+    }
+
+    public static Options addOptions() {
+        Options options = new Options();
+        options.addOption(addArtist);
+        options.addOption(getExhibitions);
+        options.addOption(getArtists);
+        options.addOption(getPaintings);
+        return options;
+    }
+
+    public static Artwork searchThroughArtwork(List<Artwork> listOfPaintings, String name) {
+
+        Artwork paintings = null;
+        paintings = listOfPaintings.stream().filter(exh -> exh.getName().toLowerCase().equals(name.toLowerCase())).findAny().get();
+        return paintings;
+
+    }
 
 
+    /**
+     *
+     * @param args
+     * @throws Exception
+     */
 
-   }
+    public static void main(String[] args) throws Exception {
+        Options options = addOptions();
 
+        CommandLineParser commandLineParser = new DefaultParser();
 
+        CommandLine cl = commandLineParser.parse(options, args);
+
+//        while(true) {
+        if((cl.hasOption(addArtist.getOpt()) || cl.hasOption(addArtist.getLongOpt())) ){
+            try {
+                ArtistsManager artistsManager = new ArtistsManager();
+
+                Artists artist = new Artists();
+                artist.setName(cl.getArgList().get(0));
+
+                artistsManager.add(artist);
+                System.out.println("You successfully added a new artist to a database!");
+            }
+            catch(Exception e) {
+                System.out.println("There is already an artist with same name in the database! Please try again.");
+                System.exit(1);
+            }
+
+        }
+        else if(cl.hasOption(getExhibitions.getOpt()) || cl.hasOption(getExhibitions.getLongOpt())){
+           ExhibitionManager exhibitionsManager = new ExhibitionManager();
+            exhibitionsManager.getAll().forEach(q -> System.out.println(q.getExhibition_name()));
+//                break;
+        }
+        else if(cl.hasOption(getPaintings.getOpt()) || cl.hasOption(getPaintings.getLongOpt())){
+            ArtworkManager artworkManager = new ArtworkManager();
+           artworkManager.getAll().forEach(q -> System.out.println(q.getName()));
+//                break;
+        }
+        else if(cl.hasOption(getArtists.getOpt()) || cl.hasOption(getArtists.getLongOpt())){
+            ArtistsManager artistsManager = new ArtistsManager();
+            artistsManager.getAll().forEach(q -> System.out.println(q.getName()));
+
+        } else {
+            printFormattedOptions(options);
+            System.exit(-1);
+//                break;
+        }
+//        }
+    }
 }
