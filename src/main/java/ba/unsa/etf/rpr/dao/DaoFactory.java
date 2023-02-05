@@ -8,6 +8,7 @@ package ba.unsa.etf.rpr.dao;
  */
 
 public class DaoFactory {  //gdje koristiti???
+    //da pristupi i jednom i drugom
    private static final ArtistsDao artistsDao = ArtistsSQLImplementation.getInstance();
     private static final ArtworkDao artworkDao = ArtworkSQLImplementation.getInstance();
     private static final ExhibitionsDao exhibitionsDao = ExhibitionsSQLImplementation.getInstance();
@@ -22,6 +23,7 @@ public class DaoFactory {  //gdje koristiti???
     }
 
     public static ArtworkDao artworkDao(){
+
         return artworkDao;
     }
 
