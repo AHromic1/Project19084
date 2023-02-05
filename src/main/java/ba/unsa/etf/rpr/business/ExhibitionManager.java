@@ -39,7 +39,7 @@ public class ExhibitionManager {
         int y = d.getYear();
         int m = d.getMonthValue();
         int dd = d.getDayOfMonth();
-        if(m < 0 || dd < 0 || y < 0 || y > Year.now().getValue()) return false;  //basic conditions
+      //  if(m < 0 || dd < 0 || y < 0 || y > Year.now().getValue()) return false;  //basic conditions
 
         if(y % 4 == 0 && y % 100 != 0 || y % 400 == 0){//leap year
             if(m == 2 &&  dd > 29) return false;
@@ -64,8 +64,13 @@ public class ExhibitionManager {
         //LocalDate s = start;
 
         //timezone?
+        int y = start.getYear();
+        int m = start.getMonthValue();
+        int dd = start.getDayOfMonth();
+        int day = LocalDate.now().getDayOfMonth();
 
-        if (start == null || !validateDate(start)) {
+        if (start == null //|| !validateDate(start)
+                ||  m < 0 || dd < 0 || y < 0) {
             throw new DBException("Invalid date!");
         }
     }
@@ -76,10 +81,18 @@ public class ExhibitionManager {
       //  Date d = Date.valueOf(end.getYear() + "-" + end.getMonth() + "-" + end.getDayOfMonth());
         //moze?
        // LocalDate s = end;
+        int y = end.getYear();
+        int m = end.getMonthValue();
+        int dd = end.getDayOfMonth();
 
-        //timezone?
 
-        if (end == null || !validateDate(end)) {
+
+        if (end == null //|| !validateDate(end)
+                || m < 0 || dd < 0 || y < 0 ||
+                y < Year.now().getValue()
+                ||( y == Year.now().getValue() && m < LocalDate.now().getMonthValue())
+                || (y == Year.now().getValue() && m == LocalDate.now().getMonthValue() && dd < LocalDate.now().getDayOfMonth())
+        ) {
             throw new DBException("Invalid date!");
         }
     }
