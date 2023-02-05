@@ -10,6 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
+
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,9 +20,27 @@ import java.util.List;
 import static org.mockito.Mockito.when;
 
 public class ExhibitionsManagerTest {
-    private ExhibitionManager exhibitionManager;
+    private ExhibitionManager exhibitionsManager;
     private Exhibitions e;
-    private ExhibitionsSQLImplementation employeeDAOSQL;
-    private List<Exhibitions> employees;
+    private ExhibitionsSQLImplementation exhibitionsSql;
+    private List<Exhibitions> exhibitions;
+
+
+    @BeforeEach
+    public void initialize(){
+       exhibitionsManager= new ExhibitionManager();
+        Mockito.mock(ExhibitionManager.class);
+        e = new Exhibitions();
+
+        e.setExhibition_name("Early work of da Vinci");
+        e.setStart_date(Date.valueOf(LocalDate.now()));
+        e.setEnd_date(21.4.2023.);
+        e.setLocation("London");
+
+        exhibitionsSql = Mockito.mock(ExhibitionsSQLImplementation.class);
+        exhibitions = new ArrayList<>();
+        exhibitions.addAll(Arrays.asList(new Exhibitions(50,"Painter's Golden Age", Date.valueOf(LocalDate.now()),"5.6.2023","Paris"));
+
+    }
 
     }
