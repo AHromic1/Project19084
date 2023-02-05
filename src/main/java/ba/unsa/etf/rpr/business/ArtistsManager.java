@@ -15,8 +15,8 @@ public class ArtistsManager {
 
 
         public void validateName(String name) throws DBException {
-            if (name == null || name.length() > 50 ||name.length() < 1){
-                throw new DBException("Artist's first name cannot be longer than 50 or shorter than 1 character1!");
+            if (name == null || name.length() > 50 || name.length() < 1){
+                throw new DBException("Artist's first name cannot be longer than 50 or shorter than 1 character!");
             }
         }
 
