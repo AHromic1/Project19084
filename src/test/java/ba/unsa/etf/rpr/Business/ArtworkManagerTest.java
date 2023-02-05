@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 public class ArtworkManagerTest {
@@ -164,5 +165,12 @@ public class ArtworkManagerTest {
 
         artworkManager.delete(a.getId());
         Assertions.assertTrue(true);
+    }
+
+    @Test
+    void validateName(){
+            String name = "";
+            assertThrows( DBException.class, ()->artworkManager.validateName(name), "Name cannot be longer than 50 or shorter than 1 character!");
+
     }
 }
