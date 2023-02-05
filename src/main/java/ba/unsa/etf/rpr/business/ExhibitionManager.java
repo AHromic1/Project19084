@@ -112,7 +112,7 @@ public class ExhibitionManager {
            DaoFactory.exhibitionsDao().delete(exhibitionId);
         }
         catch (DBException e){
-            if (e.getMessage().contains("FOREIGN KEY")){  //da li mi treba ovdje uopce???
+            if (e.getMessage().contains("FOREIGN KEY")){
                 throw new DBException("Deletion cannot be completed. First delete related items before deleting these rows.");
             }
             throw e;
