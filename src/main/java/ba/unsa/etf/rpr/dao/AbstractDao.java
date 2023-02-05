@@ -84,7 +84,8 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T>{
     //from object to database
 
     public T getById(int id) throws DBException {
-        return executeQueryUnique("SELECT * FROM " + this.tableName + " WHERE id = ?", new Object[]{id});
+        return executeQueryUnique("SELECT * FROM " + this.tableName + " WHERE id = ?", new Object[]{id}); //niz objekata
+        //moze i executeQuery
     }
 
     public List<T> getAll() throws DBException {
@@ -96,7 +97,8 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T>{
         String sql = "DELETE FROM " + tableName + " WHERE id = ?";
         try{
             PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            stmt.setObject(1, id);
+            //vraca sve jedinstvene kljuceve iz baze, autogenerisani, u id = ?
+            stmt.setObject(1, id);//1 se odnosi na prvi ?
             stmt.executeUpdate();
         }
         catch (SQLException e){
@@ -105,30 +107,30 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T>{
     }
 
     public T add(T item) throws DBException {
-        Map<String, Object> row = object2row(item);
+        Map<String, Object> row = object2row(item); //
         Map.Entry<String, String> columns = prepareInsertParts(row);
 
         StringBuilder builder = new StringBuilder();
         builder.append("INSERT INTO ").append(tableName);
-        builder.append(" (").append(columns.getKey()).append(") ");
+        builder.append(" (").append(columns.getKey()).append(") "); //getKey vraca naziv kolone
         builder.append("VALUES (").append(columns.getValue()).append(")");
 
         try{
             PreparedStatement stmt = getConnection().prepareStatement(builder.toString(), Statement.RETURN_GENERATED_KEYS);
             // bind params. IMPORTANT treeMap is used to keep columns sorted so params are bind correctly
             int counter = 1;
-            for (Map.Entry<String, Object> entry: row.entrySet()) {
+            for (Map.Entry<String, Object> entry: row.entrySet()) {  //pr
                 if (entry.getKey().equals("id")) continue; // skip ID
                 stmt.setObject(counter, entry.getValue());
                 counter++;
             }
             stmt.executeUpdate();
 
-            ResultSet rs = stmt.getGeneratedKeys();
+            ResultSet rs = stmt.getGeneratedKeys(); //pr
             rs.next(); // we know that there is one key
             item.setId(rs.getInt(1)); //set id to return it back */
 
-            return item;
+            return item;  //obicno se vraca
         }
         catch (SQLException e){
             throw new DBException(e.getMessage(), e);
@@ -170,7 +172,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T>{
      * @return List of objects from database
      * @throws DBException in case of error with db
      */
-    public List<T> executeQuery(String query, Object[] param) throws DBException{
+    public List<T> executeQuery(String query, Object[] param) throws DBException{  //pokrece upit
         try {
             PreparedStatement stmt = getConnection().prepareStatement(query);
             //šta je ovo ispod?
