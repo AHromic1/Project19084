@@ -23,7 +23,7 @@ public class ArtistsManager {
 
 
 
-    private boolean validateDate(LocalDate d){
+  /*  private boolean validateDate(LocalDate d){
         int y = d.getYear();
         int m = d.getMonthValue();
         int dd = d.getDayOfMonth();
@@ -40,7 +40,7 @@ public class ArtistsManager {
         else if(dd > 30) return false;  //a month has 30 days
 
         return true;
-    }
+    }*/
 
 
 
