@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class ExhibitionsManagerTest {
     private ExhibitionManager exhibitionsManager;
@@ -51,11 +52,18 @@ public class ExhibitionsManagerTest {
 
     }
 
+    @Test void validateName(){
+        String name = "";
+        assertThrows( DBException.class, ()->exhibitionsManager.validateExhibition_name(name));
+    }
 
         @Test void validateLocation(){
         String loc = "";
         assertThrows( DBException.class, ()->exhibitionsManager.validateLocation(loc));
     }
+
+
+
 
 
 
