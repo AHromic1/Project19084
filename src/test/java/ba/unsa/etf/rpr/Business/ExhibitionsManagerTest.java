@@ -54,12 +54,12 @@ public class ExhibitionsManagerTest {
 
     @Test void validateName(){
         String name = "";
-        assertThrows( DBException.class, ()->exhibitionsManager.validateExhibition_name(name));
+        assertThrows( DBException.class, ()->exhibitionsManager.validateExhibition_name(name), "Exhibition name cannot be longer than 50 or shorter than 1 character!");
     }
 
         @Test void validateLocation(){
         String loc = "";
-        assertThrows( DBException.class, ()->exhibitionsManager.validateLocation(loc));
+        assertThrows( DBException.class, ()->exhibitionsManager.validateLocation(loc), "Location name cannot be longer than 50 or shorter than 1 character!");
     }
 
 
