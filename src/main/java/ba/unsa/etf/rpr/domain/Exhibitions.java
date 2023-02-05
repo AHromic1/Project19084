@@ -16,7 +16,16 @@ public class Exhibitions implements Idable{
     private Date End_date;
     private String Location;
 
+    public Exhibitions(int id, String exhibition_name, Date start_date, Date end_date, String location) {
+        Id = id;
+        Exhibition_name = exhibition_name;
+        Start_date = start_date;
+        End_date = end_date;
+        Location = location;
+    }
 
+    public Exhibitions() {
+    }
 
     public String getExhibition_name() {
         return Exhibition_name;
