@@ -35,7 +35,7 @@ public class ExhibitionsController {
     public TableColumn<Exhibitions, Date> Start = new TableColumn<>();
     public TableColumn<Exhibitions, Date> End = new TableColumn<>();
     public ObservableList<Exhibitions> observableList = FXCollections.observableArrayList();  //treba observable list da bi se moglo proslijediti
-
+//pr
     public ExhibitionsController() {
        try {
             observableList.addAll(exhibitionManager.getAll());
