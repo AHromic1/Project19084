@@ -9,6 +9,7 @@ import java.util.Objects;
 
 
 public class Exhibitions implements Idable{
+    //ne mora kao u bazi
     private int Id;
     private String Exhibition_name;
     private Date Start_date;
