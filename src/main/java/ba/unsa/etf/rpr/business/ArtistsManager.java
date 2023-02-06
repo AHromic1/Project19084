@@ -11,8 +11,19 @@ import java.time.LocalDate;
 import java.time.Year;
 import java.util.List;
 
+/**
+ * business logic class for Artists
+ * @author Amina Hromić
+ * @version 1.0
+ */
+
 public class ArtistsManager {
 
+    /**
+     * a method to make sure that artist's name is in a sensible range
+     * @param name
+     * @throws DBException if the name is invalid
+     */
 
         public void validateName(String name) throws DBException {
             if (name == null || name.length() > 50 || name.length() < 1){
@@ -20,32 +31,12 @@ public class ArtistsManager {
             }
         }
 
-
-
-
-  /*  private boolean validateDate(LocalDate d){
-        int y = d.getYear();
-        int m = d.getMonthValue();
-        int dd = d.getDayOfMonth();
-        if(m < 0 || dd < 0 || y < 0 || y > Year.now().getValue()) return false;  //basic conditions
-
-        if(y % 4 == 0 && y % 100 != 0 || y % 400 == 0){//leap year
-            if(m == 2 &&  dd > 29) return false;
-        }
-        else{  //not a leap year
-            if(m == 2 &&  dd > 28) return false;
-        }
-
-        if((m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12) && dd > 31) return false;  //a month has 31 days
-        else if(dd > 30) return false;  //a month has 30 days
-
-        return true;
-    }*/
-
-
-
-
-
+    /**
+     * a method to ensure valid adding of a new artist
+     * @param a an artist to be added
+     * @return an instance of Artists
+     * @throws DBException if the adding of anew artist is invalid
+     */
 
     public Artists add(Artists a) throws DBException {
         if (a.getId() != 0){  //ne moze jer je autogeenrisan, ako u a posaljem i id
@@ -65,6 +56,12 @@ public class ArtistsManager {
         }
     }
 
+
+    /**
+     * a method to ensure valid deletion of an artist
+     * @param artistId id of an artist to be deleted
+     * @throws DBException if parent-child integrity is compromised
+     */
     public static void delete(int artistId) throws DBException{
         try{
              DaoFactory.artistsDao().delete(artistId);
@@ -78,10 +75,23 @@ public class ArtistsManager {
 
     }
 
+    /**
+     * a method to ensure valid updating of an artist
+     * @param a artist to be updated to
+     * @return instance of an updated artist
+     * @throws DBException if something is out of order
+     */
+
     public Artists update(Artists a) throws DBException{
         validateName(a.getName());
          return DaoFactory.artistsDao().update(a);
     }
+
+    /**
+     * a method to get a list of all artists
+     * @return a list of all artists
+     * @throws DBException if something is out of order
+     */
 
     public List<Artists> getAll() throws DBException{
         return DaoFactory.artistsDao().getAll();
