@@ -16,13 +16,33 @@ import java.time.LocalDate;
 import java.time.Year;
 import java.util.List;
 
+
+/**
+ * business logic class for Exhibitions
+ * @author Amina Hromić
+ * @version 1.0
+ */
+
+
 public class ExhibitionManager {
+
+    /**
+     * a method to make sure that exhibition's name is in a sensible range
+     * @param Ename
+     * @throws DBException if the name is invalid
+     */
 
     public void validateExhibition_name(String Ename) throws DBException {
         if (Ename == null || Ename.length() > 50 || Ename.length() < 1){
             throw new DBException("Exhibition name cannot be longer than 50 or shorter than 1 character!");
         }
     }
+
+    /**
+     * a method to make sure that exhibition's location is in a sensible range
+     * @param loc location to be checked
+     * @throws DBException if the location is invalid
+     */
     public void validateLocation(String loc) throws DBException {
         if (loc == null || loc.length() > 50 || loc.length() < 1){
             throw new DBException("Location name cannot be longer than 50 or shorter than 1 character!");
@@ -31,8 +51,8 @@ public class ExhibitionManager {
 
     /**
      * an additional, private function, to help validateStart and validateEnd methods
-     * @param d
-     * @return
+     * @param d date to be validated
+     * @return true if everything is in order, else returns false
      */
     //additionally,validateJavaDate(String) library function could have been user
     private boolean validateDate(LocalDate d){
@@ -55,7 +75,11 @@ public class ExhibitionManager {
     }
 
 
-
+    /**
+     * a method to make sure that exhibition's starting date is valid
+     * @param start a date to be validated
+     * @throws DBException if something is out of order
+     */
 
     public void validateStart_date(LocalDate start) throws DBException {
 
@@ -75,6 +99,11 @@ public class ExhibitionManager {
         }
     }
 
+    /**
+     * a method to make sure that exhibition's end date is valid
+     * @param end a date to be validated
+     * @throws DBException if something is out of order
+     */
 
     public void validateEnd_date(LocalDate end) throws DBException {
 
@@ -96,6 +125,13 @@ public class ExhibitionManager {
             throw new DBException("Invalid date!");
         }
     }
+
+    /**
+     * a method to ensure valid adding of a new exhibition
+     * @param e exhibition to be added
+     * @return an instance of a new exhibition
+     * @throws DBException if the adding of a new exhibition is invalid
+     */
 
 
     public Exhibitions add(Exhibitions e) throws DBException {
@@ -120,6 +156,12 @@ public class ExhibitionManager {
         }
     }
 
+    /**
+     * a method to ensure valid deletion of an exhibition
+     * @param exhibitionId id of an exhibition to be deleted
+     * @throws DBException if parent-child integrity is compromised
+     */
+
     public void delete(int exhibitionId) throws DBException{
         try{
            DaoFactory.exhibitionsDao().delete(exhibitionId);
@@ -132,6 +174,12 @@ public class ExhibitionManager {
         }
 
     }
+    /**
+     * a method to ensure valid updating of an exhibition
+     * @param e exhibition to be updated to
+     * @return instance of an updated exhibition
+     * @throws DBException if something is out of order
+     */
 
     public Exhibitions update(Exhibitions e) throws DBException{
         validateExhibition_name(e.getExhibition_name());
@@ -141,9 +189,23 @@ public class ExhibitionManager {
         return DaoFactory.exhibitionsDao().update(e);
     }
 
+    /**
+     * a method to get a list of all exhibitions
+     * @return a list of all exhibitions
+     * @throws DBException if something is out of order
+     */
+
+
     public List<Exhibitions> getAll() throws DBException{
         return DaoFactory.exhibitionsDao().getAll();
     }
+
+    /**
+     * a method which shows a list of all exhibitions happening on a required date
+     * @param d date used to search for exhibitions
+     * @return a list of all exhibitions happening on a required date
+     * @throws DBException if something is out of order
+     */
 
     public List<Exhibitions> SearchByDate(Date d) throws DBException{
         return DaoFactory.exhibitionsDao().SearchByDate(d);
