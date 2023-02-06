@@ -33,7 +33,7 @@ public class ExhibitionManager {
      */
 
     public void validateExhibition_name(String Ename) throws DBException {
-        if (Ename == null || Ename.length() > 50 || Ename.length() < 1){
+        if (Ename.length() > 50 || Ename.length() < 1 || Ename == null){
             throw new DBException("Exhibition name cannot be longer than 50 or shorter than 1 character!");
         }
     }
@@ -44,7 +44,7 @@ public class ExhibitionManager {
      * @throws DBException if the location is invalid
      */
     public void validateLocation(String loc) throws DBException {
-        if (loc == null || loc.length() > 50 || loc.length() < 1){
+        if (loc.length() > 50 || loc.length() < 1 || loc == null){
             throw new DBException("Location name cannot be longer than 50 or shorter than 1 character!");
         }
     }
