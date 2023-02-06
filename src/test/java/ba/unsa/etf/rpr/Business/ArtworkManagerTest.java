@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 public class ArtworkManagerTest {
-    private ArtworkManager artworkManager;
+    private ArtworkManager artworkManager = new ArtworkManager();
     private Artwork a;
     private ArtworkSQLImplementation artworkSql;
     private List<Artwork> artwork;
@@ -43,6 +43,7 @@ public class ArtworkManagerTest {
         artwork=new ArrayList<>();
         artwork.addAll(Arrays.asList(new Artwork(50,"Mona Lisa","Golden Age", 20000,new Exhibitions(),new Artists("Leonardo da Vinci")),
                 new Artwork(51,"The Kiss","Futurism", 30000,new Exhibitions(),new Artists("Gustav Klimt"))));
+
 
     }
     @Test
@@ -132,6 +133,7 @@ public class ArtworkManagerTest {
 
         artworkManager.add(a);
         Assertions.assertTrue(true);
+        daoFactoryMockedStatic.close();
     }
 
     @Test
@@ -150,6 +152,7 @@ public class ArtworkManagerTest {
 
         artworkManager.update(a);
         Assertions.assertTrue(true);
+        daoFactoryMockedStatic.close();
     }
     @Test
     void delete() throws DBException{
@@ -165,6 +168,7 @@ public class ArtworkManagerTest {
 
         artworkManager.delete(a.getId());
         Assertions.assertTrue(true);
+        daoFactoryMockedStatic.close();
     }
 
     @Test
