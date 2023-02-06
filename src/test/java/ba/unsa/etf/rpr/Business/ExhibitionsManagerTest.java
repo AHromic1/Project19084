@@ -32,16 +32,16 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.*;
 
 public class ExhibitionsManagerTest {
-    private ExhibitionManager exhibitionsManager;
+    private ExhibitionManager exhibitionsManager = new ExhibitionManager();
     private Exhibitions e;
     private ExhibitionsSQLImplementation exhibitionsSql;
     private List<Exhibitions> exhibitions;
 
 
-    @BeforeEach
+   /* @BeforeEach
     public void initialize(){
 
-            exhibitionsManager = Mockito.mock(ExhibitionManager.class);
+           // exhibitionsManager = Mockito.mock(ExhibitionManager.class);
             e = new Exhibitions();
             e.setExhibition_name("Picaso's studio");
             e.setLocation("Paris");
@@ -49,7 +49,7 @@ public class ExhibitionsManagerTest {
             e.setEnd_date(Date.valueOf(LocalDate.of(2023, 7, 1)));
             e.setId(51);
 
-            exhibitionsSql = Mockito.mock(ExhibitionsSQLImplementation.class);
+           // exhibitionsSql = Mockito.mock(ExhibitionsSQLImplementation.class);
             exhibitions = new ArrayList<>();
             exhibitions.addAll(Arrays.asList(
                     new Exhibitions(50, "Early work of da Vinci",Date.valueOf(LocalDate.of(2023, 1, 1)),
@@ -60,7 +60,7 @@ public class ExhibitionsManagerTest {
 
         //  exhibitions.addAll(Arrays.asList(new Exhibitions(50,"Painter's Golden Age", Date.valueOf(LocalDate.now()),"5.6.2023","Paris"));
 
-
+*/
 
     @Test void validateName(){
         String name = "";
