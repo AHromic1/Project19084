@@ -25,6 +25,9 @@ import java.lang.String;
  */
 
 public class ArtworkController {
+    /**
+     * ids
+     */
 
     private final ArtworkManager artworkManager;
 
