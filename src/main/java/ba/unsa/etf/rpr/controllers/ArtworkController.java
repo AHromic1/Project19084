@@ -19,19 +19,17 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.lang.String;
 
+/**
+ * @author Amina Hromic
+ * controller for artwork fxml file
+ */
+
 public class ArtworkController {
-
-
-
 
     private final ArtworkManager artworkManager;
 
     private ArtworkModel model = new ArtworkModel();
 
-
-   // private Integer editQuoteId;
-
-    // form fields
     public ChoiceBox<Artwork> artChooser;
     public TextField era;
     public TextField price;
@@ -39,8 +37,10 @@ public class ArtworkController {
     public TextField exhibition;
     private ObservableList<Artwork> listOfArtworks;
 
-
-public ArtworkController(){
+    /**
+     * a constructor
+     */
+    public ArtworkController(){
         artworkManager = new ArtworkManager();
     try {
         listOfArtworks = FXCollections.observableArrayList(artworkManager.getAll());
@@ -48,28 +48,29 @@ public ArtworkController(){
         throw new RuntimeException(e);
     }
 }
+
+    /**
+     * method used for initialization to an initial state
+     */
 public void initialize(){
 
             artChooser.setItems(listOfArtworks);
+            era.textProperty().bindBidirectional(model.Era);
+            price.textProperty().bindBidirectional(model.Price);
+            artist.textProperty().bindBidirectional(model.Artist);
+
+            exhibition.textProperty().bindBidirectional(model.Exhibition);
+
             artChooser.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
                 model.fromArtwork(newValue);
-                if(oldValue != null) {
-                    era.textProperty().unbindBidirectional(model.Era);
-                    price.textProperty().unbindBidirectional(model.Price);
-                    artist.textProperty().unbindBidirectional(model.Artist);
-                    exhibition.textProperty().unbindBidirectional(model.Exhibition);
-                } else {
-                    era.textProperty().bindBidirectional(model.Era);
-                    price.textProperty().bindBidirectional(model.Price);
-                  //  artist.textProperty().bindBidirectional(model.Artist);
-                  //  exhibition.textProperty().bindBidirectional(model.Exhibition);
-                }
             });
 
 
     }
 
-
+    /**
+     * model class used to help with data binding
+     */
 
 
     public class ArtworkModel{
@@ -77,29 +78,38 @@ public void initialize(){
         public SimpleObjectProperty<String> Name = new SimpleObjectProperty<String>();
         //ne moze obican string  - pravilo
         public SimpleObjectProperty<String> Era = new SimpleObjectProperty<String>();
-        public SimpleStringProperty Price;
-        public SimpleStringProperty Exhibition ;
+        public SimpleStringProperty Price = new SimpleStringProperty();
+        public SimpleStringProperty Exhibition = new SimpleStringProperty();
        // public SimpleObjectProperty<Exhibitions> Exhibition = new SimpleObjectProperty<Exhibitions>(); //name
-       public SimpleStringProperty Artist ;
+       public SimpleStringProperty Artist = new SimpleStringProperty();
        // public SimpleObjectProperty<Artists> Artist = new SimpleObjectProperty<Artists>();  //name
 
         //kao objtorow i obnuto
+
+        /**
+         * a method which transforms an instance of artwork into object to be shown
+         * @param a
+         */
         public void fromArtwork(Artwork a){
             this.Name.set(a.getName());
             this.Era.set(a.getEra());
-            this.Price = new SimpleStringProperty(String.valueOf(a.getPrice()));
-            this.Artist = new SimpleStringProperty(String.valueOf(a.getArtist()));
+            this.Price.set(String.valueOf(a.getPrice()));
+            this.Artist.set(String.valueOf(a.getArtist()));
             //this.Artist.set(a.getArtist());
-            this.Exhibition = new SimpleStringProperty(String.valueOf(a.getExhibition()));
+            this.Exhibition.set(String.valueOf(a.getExhibition().getExhibition_name()));
             //this.Exhibition.set(a.getExhibition()); //  kako?
         }
 
+        /**
+         * transforms shown objects into instances of Artwork
+         * @return an instance of Artwork
+         */
         public Artwork toArtwork(){
             Artwork a = new Artwork();
             a.setName(this.Name.getValue());
             a.setEra(this.Era.getValue());
             a.setPrice(Double.parseDouble(Price.get()));
-           // a.setExhibition(this.Exhibition.getValue());  //?
+            a.setExhibition(new Exhibitions(Exhibition.get()));
          //   a.setArtist(this.Artist.getValue());
             return a;
         }
