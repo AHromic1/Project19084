@@ -5,7 +5,6 @@ import java.util.List;
 
     /**
      * Root interface for all DAO classes
-     *
      * @author Amina Hromic
      * @version 1.0
      */
