@@ -10,13 +10,29 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+
+/**
+ * @author Amina Hromic
+ * a class for implementation of methods for Exhibitions table
+ */
+
+
 public class ExhibitionsSQLImplementation extends AbstractDao<Exhibitions> implements ExhibitionsDao {
 
     private static ExhibitionsSQLImplementation instance = null;
+
+    /**
+     * constructor for Exhibitions
+     */
     public ExhibitionsSQLImplementation() {
 
         super("Exhibitions");
     }
+
+    /**
+     * gets an instance of an Exhibitions
+     * @return
+     */
 
     public static ExhibitionsSQLImplementation getInstance(){
         if(instance==null)
@@ -24,10 +40,21 @@ public class ExhibitionsSQLImplementation extends AbstractDao<Exhibitions> imple
         return instance;
     }
 
+    /**
+     *  removes an instance of an Exhibitions
+     */
+
     public static void removeInstance(){
         if(instance!=null)
             instance=null;
     }
+
+    /**
+     * maps result set into object of type Exhibitions
+     * @param rs result set
+     * @return an object of type Exhibitions
+     * @throws DBException when something is out of order
+     */
 
     @Override
     public Exhibitions row2object(ResultSet rs) throws DBException {
@@ -46,6 +73,12 @@ public class ExhibitionsSQLImplementation extends AbstractDao<Exhibitions> imple
         }
     }
 
+    /**
+     * maps objects of type Exhibitions into rows
+     * @param object to be mapped into row
+     * @return Map<String, Object> representing a row
+     */
+
     @Override
     public Map<String, Object> object2row(Exhibitions object) {
         Map<String, Object> item = new TreeMap<>();
@@ -57,6 +90,12 @@ public class ExhibitionsSQLImplementation extends AbstractDao<Exhibitions> imple
         return item;
     }
 
+    /**
+     * impementation of a SearchbyDate method defined in ExhibitionsDao
+     * @param d date used for searching of exhibitions
+     * @return list of available exhibitions
+     * @throws DBException when something is out of order
+     */
    @Override
     public List<Exhibitions> SearchByDate(Date d) throws DBException {
         return executeQuery("SELECT * FROM Exhibitions WHERE ? > Start_date AND ? < End_date", new Object[]{d, d});
