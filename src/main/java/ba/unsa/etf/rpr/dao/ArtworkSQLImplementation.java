@@ -8,13 +8,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * @author Amina Hromic
+ * a class for implementation of methods for Artwork table
+ */
+
 public class ArtworkSQLImplementation extends AbstractDao<Artwork> implements ArtworkDao {
     private static ArtworkSQLImplementation instance = null;
+
+    /**
+     * constructor for Artwork
+     */
 
     public ArtworkSQLImplementation() {
 
         super("Artwork");
     }
+
+    /**
+     * gets an instance of an Artwork
+     * @return
+     */
 
     public static ArtworkSQLImplementation getInstance(){ //jedna instanca klase
         if(instance==null)
@@ -22,10 +36,22 @@ public class ArtworkSQLImplementation extends AbstractDao<Artwork> implements Ar
         return instance;
     }
 
+    /**
+     *  removes an instance of an Artwork
+     */
+
     public static void removeInstance(){
         if(instance!=null)
             instance=null;
     }
+
+    /**
+     * maps result set into object of type Artwork
+     * @param rs result set
+     * @return an object of type Artwork
+     * @throws DBException when something is out of order
+     */
+
     @Override
     public Artwork row2object(ResultSet rs) throws DBException {
         try {
@@ -34,6 +60,7 @@ public class ArtworkSQLImplementation extends AbstractDao<Artwork> implements Ar
             art.setName(rs.getString("Name"));
             art.setEra(rs.getString("Era"));
             art.setPrice(rs.getDouble("Price"));
+            //art.setExhibition();
            // art.setCategory(DaoFactory.categoryDao().getById(rs.getInt("category_id")));  //daofactory ovdje radi sta ?
             return art;
         } catch (Exception e) {
@@ -42,6 +69,7 @@ public class ArtworkSQLImplementation extends AbstractDao<Artwork> implements Ar
     }
 
     /**
+     * maps objects of type Exhibitions into rows
      * @param object - object to be mapped
      * @return map representation of object
      */
@@ -54,32 +82,5 @@ public class ArtworkSQLImplementation extends AbstractDao<Artwork> implements Ar
         item.put("Price", object.getPrice());
         return item;
     }
-
-    /**
-     * a method for finding artwork by era
-     * @param   era
-     * @return list of artwork
-     * @author ahromic1
-     */
-
-   // @Override   ?
-    public List<Artwork> searchByEra(String era) throws DBException{
-        return executeQuery("SELECT * FROM Artwork WHERE Era LIKE concat('%', ?, '%')", new Object[]{era});  //zasto %
-    }
-
-    /**
-     * a method for finding artwork using artist's last name
-     * @param artist_name
-     * @return list of artowek
-     * @throws DBException
-     */
-
-    //provjeri
-    //@Override ?
-    public List<Artwork> searchByArtist(String artist_name) throws DBException{
-        return executeQuery("SELECT * FROM Artwork a1, Artists a2 WHERE a1.Artist_FK = a2.Id AND a2.Last_Name LIKE concat('%', ?, '%')", new Object[]{artist_name});  //zasto %
-    }
-
-
 
 }
