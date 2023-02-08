@@ -5,6 +5,7 @@ import ba.unsa.etf.rpr.domain.Artists;
 import java.util.List;
 
 /**
+ * @author Amina Hromic
  * an interface for artists which extends Dao with methods specific for artists table
  */
 public interface ArtistsDao extends Dao<Artists> {
