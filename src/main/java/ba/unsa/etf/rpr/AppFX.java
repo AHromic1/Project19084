@@ -9,6 +9,10 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
+/**
+ * @author Amina Hromic
+ * class run when we wish to see JavaFX frontend design
+ */
 public class AppFX extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{  //prima stage
