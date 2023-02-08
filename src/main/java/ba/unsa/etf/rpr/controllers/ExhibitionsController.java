@@ -22,6 +22,11 @@ import java.util.Optional;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
+/**
+  * @author Amina Hromic
+  * controller for exhibitions fxml file
+   */
+
 public class ExhibitionsController {
 
     private final ExhibitionManager exhibitionManager = new ExhibitionManager();
@@ -35,7 +40,10 @@ public class ExhibitionsController {
     public TableColumn<Exhibitions, Date> Start = new TableColumn<>();
     public TableColumn<Exhibitions, Date> End = new TableColumn<>();
     public ObservableList<Exhibitions> observableList = FXCollections.observableArrayList();  //treba observable list da bi se moglo proslijediti
-//pr
+
+    /**
+     * constructor
+     */
     public ExhibitionsController() {
        try {
             observableList.addAll(exhibitionManager.getAll());
@@ -46,6 +54,9 @@ public class ExhibitionsController {
        }//konstruktor da bi se mogao otvoriti kontroler
     }
 
+    /**
+     * method used for initialization to an initial state
+     */
     @FXML
     void initialize(){
         Exhibition.setCellValueFactory(new PropertyValueFactory<Exhibitions, String>("Exhibition_name"));  //kol u workbench
@@ -58,12 +69,12 @@ public class ExhibitionsController {
         catch (DBException e) {
             throw new RuntimeException(e);
         }
-       /* date.editorProperty().addListener((obs, oldValue, newValue) -> {
-            System.out.println(newValue.toString());
-        });*/
     }
 
-
+    /**
+     * date picker event handler - a method which searches for exhbitions by a date set by date picker
+     * @param event which sets the action in motion
+     */
    public void SearchByDate(ActionEvent event){
         try {
             exhibitionsTable.setItems(FXCollections.observableList(exhibitionManager.SearchByDate(Date.valueOf(date.getValue()))));
@@ -76,14 +87,11 @@ public class ExhibitionsController {
 
 
 
-    /**
-     * Event handler for creation of quote
-     * @param event
-     */
+
 
 
     /**
-     * fetch quotes from DB
+     * fetch quotes from the database - refresh
      */
     private void refreshExhibitions(){
         try {
