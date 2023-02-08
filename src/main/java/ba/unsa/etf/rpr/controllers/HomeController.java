@@ -14,35 +14,55 @@ import javafx.stage.StageStyle;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
+
+/**
+ * @author Amina Hromic
+ * controller for home fxml file
+ */
+
 public class HomeController {
+    /**
+     * handles Help button - opens a new Help window
+     * @param actionEvent
+     */
 
     public void openHelp(ActionEvent actionEvent){
         openDialog("Help", "/fxml/help.fxml", new Help());
 
     }
 
+    /**
+     * handles Upcoming exhibitions button - opens a new window showing all exhibitions
+     * @param actionEvent
+     */
     public void openExhibitions(ActionEvent actionEvent){
         openDialog("Exhibitions", "/fxml/exhibitions.fxml", new ExhibitionsController()); //konstruktor
     }
+
+    /**
+     * handles Pictura artists button - opens a new window showing all artists
+     * @param actionEvent
+     */
 
     public void openArtists(ActionEvent actionEvent){
         openDialog("Artists", "/fxml/artists.fxml", new ArtistsController());
     }
 
+    /**
+     *  handles  Want to see more? button - opens a new window showing all paintings
+     * @param actionEvent
+     */
 
     public void openArtwork(ActionEvent actionEvent){
         openDialog("Artwork", "/fxml/artwork.fxml", new ArtworkController());
     }
 
-
-
-    public void openEmail(ActionEvent actionEvent){
-        openDialog("Email", "/fxml/email.fxml", new EmailController());
-    }
-
-
-
-
+    /**
+     * private method for loading stage, scene and title
+     * @param title
+     * @param file
+     * @param controller
+     */
 
     private void openDialog(String title, String file, Object controller){
         try {
