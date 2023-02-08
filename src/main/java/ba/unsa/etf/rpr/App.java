@@ -12,14 +12,11 @@ import java.util.*;
 
 /**
  * @author Amina Hromic
- * CLI (Command Line Interface) implementation in following class
- * Even though this type of presentation layer (called CLI) is becoming past tense for GUI apps
- * it's good to see how you can manipulate data through command line and database also
- *
+ * CLI (Command Line Interface) implementation App class
  */
 public class App {
     /**
-     * Defining final variables to describe all code having options
+     * final variables describing all available options
      */
     private static final Option addArtist = new Option("aa","add-artist",false, "Adding a new artist to the art gallery database");
     private static final Option getExhibitions = new Option("ge","get-exhibition",false, "Printing all exhibitions in the art gallery database");
@@ -29,9 +26,7 @@ public class App {
 
 
     /**
-     *
      * @param options
-     *
      */
     public static void printFormattedOptions(Options options) {
         HelpFormatter helpFormatter = new HelpFormatter();
@@ -41,6 +36,11 @@ public class App {
         printWriter.close();
     }
 
+    /**
+     * adding options
+     * @return Options
+     */
+
     public static Options addOptions() {
         Options options = new Options();
         options.addOption(addArtist);
@@ -49,6 +49,13 @@ public class App {
         options.addOption(getPaintings);
         return options;
     }
+
+    /**
+     * method which searches through all the Artworjk
+     * @param listOfPaintings
+     * @param name
+     * @return Artwork
+     */
 
     public static Artwork searchThroughArtwork(List<Artwork> listOfPaintings, String name) {
 
@@ -62,7 +69,7 @@ public class App {
     /**
      *
      * @param args
-     * @throws Exception
+     * @throws Exception when input is out of order
      */
 
     public static void main(String[] args) throws Exception {
@@ -72,7 +79,6 @@ public class App {
 
         CommandLine cl = commandLineParser.parse(options, args);
 
-//        while(true) {
         if((cl.hasOption(addArtist.getOpt()) || cl.hasOption(addArtist.getLongOpt())) ){
             try {
                 ArtistsManager artistsManager = new ArtistsManager();
@@ -92,12 +98,12 @@ public class App {
         else if(cl.hasOption(getExhibitions.getOpt()) || cl.hasOption(getExhibitions.getLongOpt())){
            ExhibitionManager exhibitionsManager = new ExhibitionManager();
             exhibitionsManager.getAll().forEach(q -> System.out.println(q.getExhibition_name()));
-//                break;
+
         }
         else if(cl.hasOption(getPaintings.getOpt()) || cl.hasOption(getPaintings.getLongOpt())){
             ArtworkManager artworkManager = new ArtworkManager();
            artworkManager.getAll().forEach(q -> System.out.println(q.getName()));
-//                break;
+
         }
         else if(cl.hasOption(getArtists.getOpt()) || cl.hasOption(getArtists.getLongOpt())){
             ArtistsManager artistsManager = new ArtistsManager();
@@ -106,8 +112,8 @@ public class App {
         } else {
             printFormattedOptions(options);
             System.exit(-1);
-//                break;
+
         }
-//        }
+
     }
 }
