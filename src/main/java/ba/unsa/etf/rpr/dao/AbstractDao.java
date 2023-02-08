@@ -9,18 +9,27 @@ import java.util.*;
 
 /**
  * Abstract class that implements core DAO CRUD methods for every entity
- * @author Amina Hromic 19084
+ * @author Amina Hromic
+ * @version 1.0
  */
 
 public abstract class AbstractDao <T extends Idable> implements Dao<T>{
     private static Connection connection;
     private String tableName;
 
+    /**
+     * constructor
+     * @param tableName name of the table
+     */
+
     public AbstractDao(String tableName) {
         this.tableName = tableName;
         if(connection==null) createConnection();
 }
 
+    /**
+     * a method which create a connection to the database, also uses threads
+     */
     private static void createConnection(){
         if(AbstractDao.connection==null) {
             try {
@@ -48,14 +57,18 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T>{
         }
     }
 
+    /**
+     * @return connection to the database
+     */
+
     public Connection getConnection(){
 
         return AbstractDao.connection;
     }
 
     /**
-     * For singleton pattern, we have only one connection on the database which will be closed automatically when our program ends
-     * But if we want to close connection manually, then we will call this method which should be called from finally block
+     * For singleton pattern there is only one connection to the database which will be closed automatically when our program ends
+     * This method enables for a connection to be closed manually, and should be called from a finally block
      */
 
     public static void closeConnection() {
@@ -71,15 +84,20 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T>{
         }
     }
 
+    /**
+     * setter for connection
+     * @param connection
+     */
+
     public void setConnection(Connection connection){
         this.connection = connection;
     }
 
     /**
      * mapping ResultSet into Object
-     * @param rs
-     * @return
-     * @throws DBException
+     * @param rs result set
+     * @return Object of type T
+     * @throws DBException if something is out of order
      */
 
     public abstract T row2object(ResultSet rs) throws DBException;//from database to an object
@@ -87,23 +105,40 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T>{
 
     /**
      * mapping from Object to Map
-     * @param object
-     * @return
+     * @param object to be mapped
+     * @return a map with values <String,Object>
      */
+
+
 
     public abstract Map<String, Object> object2row(T object);
     //from object to database
 
+    /**
+     * gets a value from a table for a corresponding id
+     * @param id primary key of entity
+     * @return Object of type T
+     * @throws DBException if something is out of order
+     */
     public T getById(int id) throws DBException {
         return executeQueryUnique("SELECT * FROM " + this.tableName + " WHERE id = ?", new Object[]{id}); //niz objekata
         //moze i executeQuery
     }
 
+    /**
+     * returns all valuee from a table
+     * @return List of objects of type T
+     * @throws DBException when something is out of order
+     */
     public List<T> getAll() throws DBException {
         return executeQuery("SELECT * FROM " + tableName, null);
     }
 
-    //zasto je delete ostalo isto?
+    /**
+     * deletes a value from a table for a corresponding id
+     * @param id - primary key of entity
+     * @throws DBException when something is out of order
+     */
     public void delete(int id) throws DBException {
         String sql = "DELETE FROM " + tableName + " WHERE id = ?";
         try{
@@ -117,6 +152,12 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T>{
         }
     }
 
+    /**
+     * adds item to a database
+     * @param item bean for saving to database
+     * @return Object of type T
+     * @throws DBException
+     */
     public T add(T item) throws DBException {
         Map<String, Object> row = object2row(item); //
         Map.Entry<String, String> columns = prepareInsertParts(row);
@@ -147,6 +188,13 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T>{
             throw new DBException(e.getMessage(), e);
         }
     }
+
+    /**
+     * updates an item in a database
+     * @param item - bean to be updated. id must be populated
+     * @return Object of type T
+     * @throws DBException
+     */
 
     public T update(T item) throws DBException{
         Map<String, Object> row = object2row(item);
@@ -179,9 +227,9 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T>{
     /**
      * Utility method for executing any kind of query
      * @param query - SQL query
-     * @param param - params for query
+     * @param param - parameters for query
      * @return List of objects from database
-     * @throws DBException in case of error with db
+     * @throws DBException in case of an error with the database
      */
     public List<T> executeQuery(String query, Object[] param) throws DBException{  //pokrece upit
         try {
@@ -207,8 +255,8 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T>{
     /**
      * Utility for query execution that always return single record
      * @param query - query that returns single record
-     * @param param - list of params for sql query
-     * @return Object
+     * @param param - list of parameters for sql query
+     * @return Object of type T
      * @throws DBException in case when object is not found
      */
     public T executeQueryUnique(String query, Object[] param) throws DBException{
@@ -246,8 +294,8 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T>{
 
     /**
      * Prepare columns for update statement id=?, name=?, ...
-     * @param row
-     * @return
+     * @param row - represented with a Map
+     * @return String
      */
     private String prepareUpdateParts(Map<String, Object> row){
         StringBuilder columns = new StringBuilder();
