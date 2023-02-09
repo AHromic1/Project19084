@@ -17,8 +17,8 @@ import static org.mockito.Mockito.when;
 
 
 /**
+ * junit tests for ArtistManager class methods
  * @author Amina Hromic
- *
  */
 class ArtistsManagerTest {
 
@@ -43,7 +43,7 @@ class ArtistsManagerTest {
     }
 
     /**
-     * In this method we will test validateName(String name) for correct and incorrect passed parameters
+     * testing validateName(String name) for correct and incorrect passed parameters
      */
 
     @Test
@@ -72,7 +72,7 @@ class ArtistsManagerTest {
 
 
     /**
-     * Adding category that already exists
+     * Adding an artists that already exists
      * @throws DBException
      */
     @Test
@@ -94,7 +94,7 @@ class ArtistsManagerTest {
     }
 
     /**
-     * Adding a new category
+     * Adding a new artist
      * @throws DBException
      */
     @Test
