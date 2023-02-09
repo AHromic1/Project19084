@@ -97,10 +97,8 @@ public void initialize(){
             this.Name.set(a.getName());
             this.Era.set(a.getEra());
             this.Price.set(String.valueOf(a.getPrice()));
-            this.Artist.set(String.valueOf(a.getArtist()));
-            //this.Artist.set(a.getArtist());
+            this.Artist.set(String.valueOf(a.getArtist().getName()));
             this.Exhibition.set(String.valueOf(a.getExhibition().getExhibition_name()));
-            //this.Exhibition.set(a.getExhibition()); //  kako?
         }
 
         /**
@@ -113,7 +111,7 @@ public void initialize(){
             a.setEra(this.Era.getValue());
             a.setPrice(Double.parseDouble(Price.get()));
             a.setExhibition(new Exhibitions(Exhibition.get()));
-         //   a.setArtist(this.Artist.getValue());
+            a.setArtist(new Artists(Artist.get()));
             return a;
         }
     }
