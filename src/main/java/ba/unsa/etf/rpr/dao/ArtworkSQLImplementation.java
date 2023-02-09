@@ -60,8 +60,8 @@ public class ArtworkSQLImplementation extends AbstractDao<Artwork> implements Ar
             art.setName(rs.getString("Name"));
             art.setEra(rs.getString("Era"));
             art.setPrice(rs.getDouble("Price"));
-            //art.setExhibition();
-           // art.setCategory(DaoFactory.categoryDao().getById(rs.getInt("category_id")));  //daofactory ovdje radi sta ?
+            art.setExhibition(DaoFactory.exhibitionsDao().getById(rs.getInt("Exhibition_FK")));
+            art.setArtist(DaoFactory.artistsDao().getById(rs.getInt("Artists_FK")));
             return art;
         } catch (Exception e) {
             throw new DBException(e.getMessage(), e);
@@ -80,6 +80,8 @@ public class ArtworkSQLImplementation extends AbstractDao<Artwork> implements Ar
         item.put("Name", object.getName());
         item.put("Era", object.getEra());
         item.put("Price", object.getPrice());
+        item.put("Exhibition_FK", object.getExhibition().getId());
+        item.put("Artists_FK", object.getArtist().getId());
         return item;
     }
 
